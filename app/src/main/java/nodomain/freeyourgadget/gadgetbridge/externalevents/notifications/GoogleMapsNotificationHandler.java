@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import ej_utils.hp_misc;
 import nodomain.freeyourgadget.gadgetbridge.GBApplication;
 import nodomain.freeyourgadget.gadgetbridge.model.NavigationInfoSpec;
 import nodomain.freeyourgadget.gadgetbridge.util.Prefs;
@@ -1290,8 +1291,7 @@ public class GoogleMapsNotificationHandler {
 
         final boolean navigationScreenOn = prefs.getBoolean("nagivation_screen_on", true);
         if (!navigationScreenOn) {
-            PowerManager powermanager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-            if (powermanager != null && powermanager.isScreenOn()) {
+            if (hp_misc.isScreenOn(context)) {
                 LOG.info("Not forwarding navigation instructions, screen seems to be on and settings do not allow this");
                 shouldSendNavigation = false;
                 return;

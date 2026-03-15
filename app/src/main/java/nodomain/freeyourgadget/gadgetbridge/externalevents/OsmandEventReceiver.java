@@ -43,6 +43,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import ej_utils.hp_misc;
 import nodomain.freeyourgadget.gadgetbridge.GBApplication;
 import nodomain.freeyourgadget.gadgetbridge.R;
 import nodomain.freeyourgadget.gadgetbridge.model.NavigationInfoSpec;
@@ -188,8 +189,7 @@ public class OsmandEventReceiver {
 
         boolean navigationScreenOn = prefs.getBoolean("nagivation_screen_on", true);
         if (!navigationScreenOn) {
-            PowerManager powermanager = (PowerManager) app.getSystemService(Context.POWER_SERVICE);
-            if (powermanager != null && powermanager.isScreenOn()) {
+            if (hp_misc.isScreenOn(app)) {
                 LOG.info("Not forwarding navigation instructions, screen seems to be on and settings do not allow this");
                 return false;
             }

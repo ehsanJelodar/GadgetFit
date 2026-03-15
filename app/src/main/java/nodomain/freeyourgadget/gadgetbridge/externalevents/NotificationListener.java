@@ -76,6 +76,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import de.greenrobot.dao.query.Query;
+import ej_utils.hp_misc;
 import nodomain.freeyourgadget.gadgetbridge.BuildConfig;
 import nodomain.freeyourgadget.gadgetbridge.GBApplication;
 import nodomain.freeyourgadget.gadgetbridge.R;
@@ -167,6 +168,9 @@ public class NotificationListener extends NotificationListenerService {
     private final Handler mHandler = new Handler();
     private Runnable mSetMusicInfoRunnable = null;
     private Runnable mSetMusicStateRunnable = null;
+
+    private long lastNotificationCallTime = 0L;
+
 
     private boolean isDreaming = false;
 
@@ -337,13 +341,30 @@ public class NotificationListener extends NotificationListenerService {
         super.onDestroy();
     }
 
+
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
+
         onNotificationPosted(sbn, null);
     }
 
+    /// this method will be called by android device automatically.
     @Override
     public void onNotificationPosted(StatusBarNotification sbn, RankingMap rankingMap) {
+
+        //-- add by esd to optimize --
+        //Throttle after 1 sec
+        long now = System.currentTimeMillis();
+        if (now - lastNotificationCallTime < 1000) {
+            return;
+        }
+        lastNotificationCallTime = now;
+
+        if (shouldIgnoreNotificationBasedOnScreenOn()) {
+            return;
+        }
+        //-- add by esd to optimize --
+
         logNotification(sbn, true);
 
         notificationStack.remove(sbn.getPackageName());
@@ -1273,18 +1294,16 @@ public class NotificationListener extends NotificationListenerService {
         // Check for screen on when posting the notification; for removal, the screen
         // has to be on (obviously)
         if (!remove) {
-            if (!prefs.getBoolean("notifications_generic_whenscreenon", false)) {
-                final PowerManager powermanager = (PowerManager) getSystemService(POWER_SERVICE);
-                if (powermanager != null && powermanager.isScreenOn()) {
-                    if (!isDreaming) {
-                        LOG.info("Not forwarding notification, screen seems to be on and settings do not allow this");
-                        return true;
-                    } else if (!prefs.getBoolean("notifications_generic_when_screen_saver", true)) {
-                        LOG.info("Not forwarding notification, screen saver seems to be on and settings do not allow this");
-                        return true;
-                    }
+            if (shouldIgnoreNotificationBasedOnScreenOn()){
+                if (!isDreaming) {
+                    LOG.info("Not forwarding notification, screen seems to be on and settings do not allow this");
+                    return true;
+                } else if (!prefs.getBoolean("notifications_generic_when_screen_saver", true)) {
+                    LOG.info("Not forwarding notification, screen saver seems to be on and settings do not allow this");
+                    return true;
                 }
             }
+
         }
 
         if (prefs.getBoolean("notifications_ignore_low_priority", true)) {
@@ -1337,6 +1356,17 @@ public class NotificationListener extends NotificationListenerService {
 
     }
 
+    /// check notification based screen on/off settings.
+    private boolean shouldIgnoreNotificationBasedOnScreenOn()
+    {
+        Prefs prefs = GBApplication.getPrefs();
+        if (!prefs.getBoolean("notifications_generic_whenscreenon", false)) {
+            if (hp_misc.isScreenOn(this)){
+                return true;
+            }
+        }
+        return false;
+    }
     private static class NotificationAction {
         private final PendingIntent intent;
         @Nullable

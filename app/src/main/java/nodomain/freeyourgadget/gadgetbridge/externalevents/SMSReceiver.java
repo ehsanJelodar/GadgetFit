@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import ej_utils.hp_misc;
 import nodomain.freeyourgadget.gadgetbridge.GBApplication;
 import nodomain.freeyourgadget.gadgetbridge.R;
 import nodomain.freeyourgadget.gadgetbridge.model.NotificationSpec;
@@ -45,8 +46,7 @@ public class SMSReceiver extends BroadcastReceiver {
             return;
         }
         if ("when_screen_off".equals(prefs.getString("notification_mode_sms", "when_screen_off"))) {
-            PowerManager powermanager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-            if (powermanager != null && powermanager.isScreenOn()) {
+            if (hp_misc.isScreenOn(context)) {
                 return;
             }
         }

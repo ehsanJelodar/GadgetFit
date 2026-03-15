@@ -160,8 +160,8 @@ public class BLEScanService extends Service {
             restartScan(true);
         }
 
-        // schedule after 5 seconds to fix weird timing of both services
-        scheduleRestartScan(5000);
+        // schedule after 3 seconds to fix weird timing of both services
+        scheduleRestartScan(3000);
     }
 
     private void scheduleRestartScan() {
@@ -177,7 +177,7 @@ public class BLEScanService extends Service {
             } catch (Exception e) {
                 LOG.error("error during scheduled scan restart", e);
             }
-            scheduleRestartScan();
+           //-- scheduleRestartScan();//disabled by esd to fix rescan issue
         }, millis);
     }
 

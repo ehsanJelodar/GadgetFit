@@ -17,6 +17,7 @@ tasks.withType(Test).configureEach {
 final def getVersionCode = { ->
     try {
         final def commitCount = providers.exec {
+            workingDir = project.rootDir
             commandLine('git', 'rev-list', 'HEAD', '--count')
         }.standardOutput.asText.get().trim()
         return Integer.valueOf(commitCount)
@@ -28,15 +29,22 @@ final def getVersionCode = { ->
 tasks.register("buildGitChangelog"){
     final def changelogFile = new File("${project.rootDir}/app/build/generated/res/changelog/xml/changelog_git.xml")
 
-    inputs.file(project.rootProject.file(".git/HEAD"))
+    if (new File(project.rootDir, ".git").exists()) {
+        inputs.file(project.rootProject.file(".git/HEAD"))
+    }
     outputs.file(changelogFile)
 
     doLast {
-        final def allCommits = providers.exec {
-            commandLine('git', 'log', '--pretty=format:%h %s')
-        }.standardOutput.asText.get()
+        def allCommits = ""
+        try {
+            allCommits = providers.exec {
+                workingDir = project.rootDir
+                commandLine('git', 'log', '--pretty=format:%h %s')
+            }.standardOutput.asText.get()
+        } catch (ignored) {
+        }
 
-        def commitVersionCode = getVersionCode()
+        def commitVersionCode = getVersionCode() ?: 0
         def includedCommits = 0
         final def changelogNode = new Node(null, 'changelog')
 
@@ -45,7 +53,13 @@ tasks.register("buildGitChangelog"){
                 return true
             }
 
-            final def (commitHash, commitMessage) = line.split(" ", 2)
+            final def split = line.split(" ", 2)
+            if (split.length < 2) {
+                return true
+            }
+            final def commitHash = split[0]
+            final def commitMessage = split[1]
+
             if (commitMessage.contains("Translated using Weblate")) {
                 return true
             }
@@ -63,6 +77,7 @@ tasks.register("buildGitChangelog"){
 final def getGitHashShort = { ->
     try {
         return providers.exec {
+            workingDir = project.rootDir
             commandLine('git', 'rev-parse', '--short', 'HEAD')
         }.standardOutput.asText.get().trim()
     } catch (ignored) {
