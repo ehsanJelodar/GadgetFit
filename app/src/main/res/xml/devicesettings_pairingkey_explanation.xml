@@ -8,7 +8,7 @@
         android:summary="@string/pref_explanation_authkey" >
         <intent
             android:action="android.intent.action.VIEW"
-            android:data="https://gadgetbridge.org/basics/pairing/"
+            android:data="https://gadgetfit.org/basics/pairing/"
             />
     </Preference>
 

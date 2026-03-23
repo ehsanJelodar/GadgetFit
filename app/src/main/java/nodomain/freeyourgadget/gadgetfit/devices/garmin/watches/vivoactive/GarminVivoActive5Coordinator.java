@@ -1,0 +1,31 @@
+package nodomain.freeyourgadget.gadgetfit.devices.garmin.watches.vivoactive;
+
+import androidx.annotation.NonNull;
+
+import java.util.regex.Pattern;
+
+import nodomain.freeyourgadget.gadgetfit.R;
+import nodomain.freeyourgadget.gadgetfit.devices.garmin.watches.GarminWatchCoordinator;
+import nodomain.freeyourgadget.gadgetfit.impl.GBDevice;
+
+public class GarminVivoActive5Coordinator extends GarminWatchCoordinator {
+    @Override
+    protected Pattern getSupportedDeviceName() {
+        return Pattern.compile("^vívoactive 5$");
+    }
+
+    @Override
+    public int getDeviceNameResource() {
+        return R.string.devicetype_garmin_vivoactive_5;
+    }
+
+    @Override
+    public boolean supportsTrainingLoad(@NonNull GBDevice device) {
+        return false;
+    }
+
+    @Override
+    public boolean supportsVO2MultiSport(@NonNull GBDevice device) {
+        return false;
+    }
+}

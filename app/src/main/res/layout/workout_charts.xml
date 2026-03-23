@@ -4,7 +4,7 @@
     android:background="?android:attr/windowBackground"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="nodomain.freeyourgadget.gadgetbridge.activities.workouts.charts.WorkoutChartsActivity">
+    tools:context="nodomain.freeyourgadget.gadgetfit.activities.workouts.charts.WorkoutChartsActivity">
 
 
     <com.github.mikephil.charting.charts.CombinedChart

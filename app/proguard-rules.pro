@@ -15,31 +15,31 @@
 -keepclassmembers class * {
     @android.webkit.JavascriptInterface <methods>;
 }
--keepclassmembers class nodomain.freeyourgadget.gadgetbridge.service.devices.pebble.webview.JSInterface {
+-keepclassmembers class nodomain.freeyourgadget.gadgetfit.service.devices.pebble.webview.JSInterface {
     public *;
 }
 # Required for reflection in BangleJSDeviceSupport
--keepclassmembers class nodomain.freeyourgadget.gadgetbridge.model.CallSpec {
+-keepclassmembers class nodomain.freeyourgadget.gadgetfit.model.CallSpec {
     public static *;
 }
 # Required for reflection in method GattCharacteristic.initDebugMap()
--keepclassmembers class nodomain.freeyourgadget.gadgetbridge.service.btle.GattCharacteristic {
+-keepclassmembers class nodomain.freeyourgadget.gadgetfit.service.btle.GattCharacteristic {
     public static *;
 }
 # Keep constructors for support classes, as they're called by reflection in DeviceSupportFactory#createServiceDeviceSupport
--keep public class * extends nodomain.freeyourgadget.gadgetbridge.service.DeviceSupport
--keepclassmembers class * extends nodomain.freeyourgadget.gadgetbridge.service.DeviceSupport {
-    public <init>(nodomain.freeyourgadget.gadgetbridge.model.DeviceType);
+-keep public class * extends nodomain.freeyourgadget.gadgetfit.service.DeviceSupport
+-keepclassmembers class * extends nodomain.freeyourgadget.gadgetfit.service.DeviceSupport {
+    public <init>(nodomain.freeyourgadget.gadgetfit.model.DeviceType);
     public <init>();
 }
 -keepattributes JavascriptInterface
 
 # Keep coordinators, they're only referenced from DeviceType
--keep public class * implements nodomain.freeyourgadget.gadgetbridge.devices.DeviceCoordinator
+-keep public class * implements nodomain.freeyourgadget.gadgetfit.devices.DeviceCoordinator
 
 # Keep parseIncoming for GFDIMessage classes, as it is called by reflection in GFDIMessage#parseIncoming
--keep public class * extends nodomain.freeyourgadget.gadgetbridge.service.devices.garmin.messages.GFDIMessage
--keepclassmembers class * extends nodomain.freeyourgadget.gadgetbridge.service.devices.garmin.messages.GFDIMessage {
+-keep public class * extends nodomain.freeyourgadget.gadgetfit.service.devices.garmin.messages.GFDIMessage
+-keepclassmembers class * extends nodomain.freeyourgadget.gadgetfit.service.devices.garmin.messages.GFDIMessage {
     public static *** parseIncoming(...);
 }
 
@@ -72,14 +72,14 @@
 -keepclassmembers,allowobfuscation class * {
   @com.google.gson.annotations.SerializedName <fields>;
 }
--keep class nodomain.freeyourgadget.gadgetbridge.service.devices.gree.messages.** {*; }
--keep class nodomain.freeyourgadget.gadgetbridge.devices.pinetime.InfiniTimeDFU* { *; }
+-keep class nodomain.freeyourgadget.gadgetfit.service.devices.gree.messages.** {*; }
+-keep class nodomain.freeyourgadget.gadgetfit.devices.pinetime.InfiniTimeDFU* { *; }
 
 # Keep generated protobuf classes
 -keep class * extends com.google.protobuf.GeneratedMessageLite { *; }
 
 # Keep debug preference fragments that might only be referenced from xml
--keep class nodomain.freeyourgadget.gadgetbridge.activities.debug.** extends androidx.fragment.app.Fragment { *; }
+-keep class nodomain.freeyourgadget.gadgetfit.activities.debug.** extends androidx.fragment.app.Fragment { *; }
 
 # jsoup 1.22.1 introduces support for re2j, but falls back to java Regex if not available
 # Since we only use jsoup to clean the html, we do not need the extra dependency

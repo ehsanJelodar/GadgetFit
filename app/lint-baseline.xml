@@ -7,7 +7,7 @@
         errorLine1="        LOG.info(&quot;connection attempt detected from &quot; + device.getAddress() + &quot;(&quot; + device.getName() + &quot;)&quot;);"
         errorLine2="                                                                                   ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/externalevents/BluetoothConnectReceiver.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/externalevents/BluetoothConnectReceiver.java"
             line="53"
             column="84"/>
     </issue>
@@ -18,7 +18,7 @@
         errorLine1="                    LOG.info(&quot;Bond state changed: &quot; + device + &quot;, state: &quot; + device.getBondState() + &quot;, expected address: &quot; + bondingMacAddress);"
         errorLine2="                                                                             ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="96"
             column="78"/>
     </issue>
@@ -29,7 +29,7 @@
         errorLine1="        if (device.createBond()) {"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="229"
             column="13"/>
     </issue>
@@ -40,7 +40,7 @@
         errorLine1="                    device.getName(),"
         errorLine2="                    ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="235"
             column="21"/>
     </issue>
@@ -51,7 +51,7 @@
         errorLine1="                    device.getType())"
         errorLine2="                    ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="237"
             column="21"/>
     </issue>
@@ -62,7 +62,7 @@
         errorLine1="            BluetoothClass bluetoothClass = device.getBluetoothClass();"
         errorLine2="                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="240"
             column="45"/>
     </issue>
@@ -73,7 +73,7 @@
         errorLine1="            if (device.getBondState() == BluetoothDevice.BOND_BONDED) {"
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="250"
             column="17"/>
     </issue>
@@ -84,7 +84,7 @@
         errorLine1="            } else if (device.getBondState() == BluetoothDevice.BOND_BONDING) {"
         errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="253"
             column="24"/>
     </issue>
@@ -95,7 +95,7 @@
         errorLine1="                toast(context.getContext(), context.getContext().getString(R.string.discovery_bonding_failed_immediately, device.getName()), Toast.LENGTH_SHORT, GB.ERROR);"
         errorLine2="                                                                                                                          ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="258"
             column="123"/>
     </issue>
@@ -106,7 +106,7 @@
         errorLine1="                    if (deviceToPair.getBondState() != BluetoothDevice.BOND_BONDED) {"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="276"
             column="25"/>
     </issue>
@@ -117,7 +117,7 @@
         errorLine1="        return (device.getType() == BluetoothDevice.DEVICE_TYPE_DUAL || device.getType() == BluetoothDevice.DEVICE_TYPE_LE) &amp;&amp;"
         errorLine2="                ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="292"
             column="17"/>
     </issue>
@@ -128,7 +128,7 @@
         errorLine1="        return (device.getType() == BluetoothDevice.DEVICE_TYPE_DUAL || device.getType() == BluetoothDevice.DEVICE_TYPE_LE) &amp;&amp;"
         errorLine2="                                                                        ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="292"
             column="73"/>
     </issue>
@@ -139,7 +139,7 @@
         errorLine1="                (device.getName().startsWith(&quot;Pebble-LE &quot;) || device.getName().startsWith(&quot;Pebble Time LE &quot;));"
         errorLine2="                 ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="293"
             column="18"/>
     </issue>
@@ -150,7 +150,7 @@
         errorLine1="                (device.getName().startsWith(&quot;Pebble-LE &quot;) || device.getName().startsWith(&quot;Pebble Time LE &quot;));"
         errorLine2="                                                              ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="293"
             column="63"/>
     </issue>
@@ -161,7 +161,7 @@
         errorLine1="        return device.getType() == BluetoothDevice.DEVICE_TYPE_LE &amp;&amp;"
         errorLine2="               ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="300"
             column="16"/>
     </issue>
@@ -172,7 +172,7 @@
         errorLine1="                device.getName().startsWith(&quot;Pebble &quot;) &amp;&amp;"
         errorLine2="                ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="301"
             column="17"/>
     </issue>
@@ -183,7 +183,7 @@
         errorLine1="                !device.getName().startsWith(&quot;Pebble Time LE &quot;);"
         errorLine2="                 ~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/java/nodomain/freeyourgadget/gadgetbridge/util/BondingUtil.java"
+            file="src/main/java/nodomain/freeyourgadget/gadgetfit/util/BondingUtil.java"
             line="302"
             column="18"/>
     </issue>
@@ -6794,7 +6794,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;hr&quot; (Croatian) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-hr/strings.xml"
@@ -6805,7 +6805,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;id&quot; (Indonesian) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-id/strings.xml"
@@ -6816,7 +6816,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;zh&quot; (Chinese) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-zh-rTW/strings.xml"
@@ -6827,7 +6827,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;fi&quot; (Finnish) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-fi/strings.xml"
@@ -6838,7 +6838,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;my&quot; (Burmese) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-my/strings.xml"
@@ -6849,7 +6849,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;sv&quot; (Swedish) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-sv/strings.xml"
@@ -6860,7 +6860,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;lt&quot; (Lithuanian) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-lt/strings.xml"
@@ -6871,7 +6871,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;fa&quot; (Persian) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-fa/strings.xml"
@@ -6882,7 +6882,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;ro&quot; (Romanian) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-ro/strings.xml"
@@ -6893,7 +6893,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;vi&quot; (Vietnamese) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-vi/strings.xml"
@@ -6904,7 +6904,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;et&quot; (Estonian) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-et/strings.xml"
@@ -6926,7 +6926,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; has been marked as translatable=&quot;false&quot; elsewhere (usually in the `values` folder), but is translated to &quot;tr&quot; (Turkish) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-tr/strings.xml"
@@ -6937,7 +6937,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;hu&quot; (Hungarian) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-hu/strings.xml"
@@ -6948,7 +6948,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;uk&quot; (Ukrainian) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-uk/strings.xml"
@@ -6959,7 +6959,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;bg&quot; (Bulgarian) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-bg/strings.xml"
@@ -6970,7 +6970,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;sk&quot; (Slovak) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-sk/strings.xml"
@@ -6992,7 +6992,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;gl&quot; (Galician) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-gl/strings.xml"
@@ -7102,7 +7102,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;pl&quot; (Polish) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-pl/strings.xml"
@@ -7113,7 +7113,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;pt&quot; (Portuguese) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-pt/strings.xml"
@@ -7146,7 +7146,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;ko&quot; (Korean) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-ko/strings.xml"
@@ -7157,7 +7157,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;ru&quot; (Russian) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-ru/strings.xml"
@@ -7168,7 +7168,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;ca&quot; (Catalan) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-ca/strings.xml"
@@ -7179,7 +7179,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;it&quot; (Italian) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-it/strings.xml"
@@ -7190,7 +7190,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;el&quot; (Greek) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-el/strings.xml"
@@ -7201,7 +7201,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;he&quot; (Hebrew) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-he/strings.xml"
@@ -7212,7 +7212,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;cs&quot; (Czech) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-cs/strings.xml"
@@ -7223,7 +7223,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;zh&quot; (Chinese) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-zh-rCN/strings.xml"
@@ -7234,7 +7234,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;nl&quot; (Dutch) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-nl/strings.xml"
@@ -7245,7 +7245,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;nb&quot; (Norwegian Bokmål) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-nb-rNO/strings.xml"
@@ -7256,7 +7256,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;pt&quot; (Portuguese) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-pt-rBR/strings.xml"
@@ -7267,7 +7267,7 @@
     <issue
         id="Untranslatable"
         message="The resource string &quot;mi2_prefs_button_press_broadcast_default_value&quot; is marked as translatable=&quot;false&quot;, but is translated to &quot;de&quot; (German) here"
-        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetbridge.ButtonPressed&lt;/string>"
+        errorLine1="    &lt;string name=&quot;mi2_prefs_button_press_broadcast_default_value&quot; translatable=&quot;false&quot;>nodomain.freeyourgadget.gadgetfit.ButtonPressed&lt;/string>"
         errorLine2="                                                                  ~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values-de/strings.xml"
@@ -8489,7 +8489,7 @@
 
     <issue
         id="StaticFieldLeak"
-        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetbridge.service.AbstractDeviceSupport.StoreDataTask)"
+        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetfit.service.AbstractDeviceSupport.StoreDataTask)"
         errorLine1="    public class StoreDataTask extends DBAccess {"
         errorLine2="                 ~~~~~~~~~~~~~">
         <location
@@ -8500,7 +8500,7 @@
 
     <issue
         id="StaticFieldLeak"
-        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetbridge.activities.charts.ActivityListingDashboard.RefreshTask)"
+        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetfit.activities.charts.ActivityListingDashboard.RefreshTask)"
         errorLine1="    public class RefreshTask extends DBAccess {"
         errorLine2="                 ~~~~~~~~~~~">
         <location
@@ -8511,7 +8511,7 @@
 
     <issue
         id="StaticFieldLeak"
-        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetbridge.activities.ActivitySummariesChartFragment.RefreshTask)"
+        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetfit.activities.ActivitySummariesChartFragment.RefreshTask)"
         errorLine1="    public class RefreshTask extends DBAccess {"
         errorLine2="                 ~~~~~~~~~~~">
         <location
@@ -8522,7 +8522,7 @@
 
     <issue
         id="StaticFieldLeak"
-        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetbridge.activities.BatteryInfoChartFragment.RefreshTask)"
+        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetfit.activities.BatteryInfoChartFragment.RefreshTask)"
         errorLine1="    public class RefreshTask extends DBAccess {"
         errorLine2="                 ~~~~~~~~~~~">
         <location
@@ -8533,7 +8533,7 @@
 
     <issue
         id="StaticFieldLeak"
-        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetbridge.activities.ControlCenterv2.RefreshTask)"
+        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetfit.activities.ControlCenterv2.RefreshTask)"
         errorLine1="    public class RefreshTask extends DBAccess {"
         errorLine2="                 ~~~~~~~~~~~">
         <location
@@ -8566,7 +8566,7 @@
 
     <issue
         id="StaticFieldLeak"
-        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetbridge.database.PeriodicExporter.RefreshTask)"
+        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetfit.database.PeriodicExporter.RefreshTask)"
         errorLine1="    public class RefreshTask extends DBAccess {"
         errorLine2="                 ~~~~~~~~~~~">
         <location
@@ -8577,7 +8577,7 @@
 
     <issue
         id="StaticFieldLeak"
-        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetbridge.activities.charts.StepStreaksDashboard.TaskCalculateLatestStepsStreak)"
+        message="This `AsyncTask` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetfit.activities.charts.StepStreaksDashboard.TaskCalculateLatestStepsStreak)"
         errorLine1="    public class TaskCalculateLatestStepsStreak extends DBAccess {"
         errorLine2="                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -9072,7 +9072,7 @@
 
     <issue
         id="HandlerLeak"
-        message="This `Handler` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetbridge.util.WebViewSingleton.IncomingHandler)"
+        message="This `Handler` class should be static or leaks might occur (nodomain.freeyourgadget.gadgetfit.util.WebViewSingleton.IncomingHandler)"
         errorLine1="    private class IncomingHandler extends Handler {"
         errorLine2="                  ~~~~~~~~~~~~~~~">
         <location

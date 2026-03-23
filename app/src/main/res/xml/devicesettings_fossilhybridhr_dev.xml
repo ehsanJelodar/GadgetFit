@@ -23,7 +23,7 @@
         android:icon="@drawable/ic_file_upload">
         <intent
             android:targetPackage="@string/applicationId"
-            android:targetClass="nodomain.freeyourgadget.gadgetbridge.devices.qhybrid.FileManagementActivity" />
+            android:targetClass="nodomain.freeyourgadget.gadgetfit.devices.qhybrid.FileManagementActivity" />
     </Preference>
 
     <SwitchPreferenceCompat

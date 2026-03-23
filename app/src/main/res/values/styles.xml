@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- light theme -->
-    <style name="GadgetbridgeTheme" parent="Theme.Material3.Light">
+    <style name="gadgetfitTheme" parent="Theme.Material3.Light">
         <item name="textColorPrimary">@color/primarytext_light</item>
         <item name="textColorSecondary">@color/secondarytext</item>
         <item name="textColorTertiary">@color/tertiarytext_light</item>
@@ -14,10 +14,10 @@
 
         <item name="elevationOverlayEnabled">false</item>
 
-        <item name="actionBarStyle">@style/GadgetbridgeTheme.RedActionBar</item>
-        <item name="drawerArrowStyle">@style/GadgetbridgeTheme.DrawerButtonStyle</item>
-        <item name="toolbarNavigationButtonStyle">@style/GadgetbridgeTheme.NavigationButtonStyle</item>
-        <item name="actionOverflowButtonStyle">@style/GadgetbridgeTheme.OverflowMenuButton</item>
+        <item name="actionBarStyle">@style/gadgetfitTheme.RedActionBar</item>
+        <item name="drawerArrowStyle">@style/gadgetfitTheme.DrawerButtonStyle</item>
+        <item name="toolbarNavigationButtonStyle">@style/gadgetfitTheme.NavigationButtonStyle</item>
+        <item name="actionOverflowButtonStyle">@style/gadgetfitTheme.OverflowMenuButton</item>
         <item name="preferenceTheme">@style/AppPreferenceThemeOverlay</item>
 
         <item name="drawer_header_color">?attr/colorPrimaryDark</item>
@@ -47,7 +47,7 @@
     </style>
 
     <!-- dark theme -->
-    <style name="GadgetbridgeThemeDark" parent="Theme.Material3.Dark">
+    <style name="gadgetfitThemeDark" parent="Theme.Material3.Dark">
         <item name="textColorPrimary">@color/primarytext_dark</item>
         <item name="textColorSecondary">@color/secondarytext</item>
         <item name="textColorTertiary">@color/tertiarytext_dark</item>
@@ -61,10 +61,10 @@
 
         <item name="elevationOverlayEnabled">false</item>
 
-        <item name="actionBarStyle">@style/GadgetbridgeTheme.RedActionBar</item>
-        <item name="drawerArrowStyle">@style/GadgetbridgeTheme.DrawerButtonStyle</item>
-        <item name="toolbarNavigationButtonStyle">@style/GadgetbridgeTheme.NavigationButtonStyle</item>
-        <item name="actionOverflowButtonStyle">@style/GadgetbridgeTheme.OverflowMenuButton</item>
+        <item name="actionBarStyle">@style/gadgetfitTheme.RedActionBar</item>
+        <item name="drawerArrowStyle">@style/gadgetfitTheme.DrawerButtonStyle</item>
+        <item name="toolbarNavigationButtonStyle">@style/gadgetfitTheme.NavigationButtonStyle</item>
+        <item name="actionOverflowButtonStyle">@style/gadgetfitTheme.OverflowMenuButton</item>
         <item name="preferenceTheme">@style/AppPreferenceThemeOverlay</item>
 
         <item name="drawer_header_color">?attr/colorPrimaryDark</item>
@@ -93,17 +93,17 @@
     </style>
 
     <!-- black theme -->
-    <style name="GadgetbridgeThemeBlack" parent="GadgetbridgeThemeDark">
+    <style name="gadgetfitThemeBlack" parent="gadgetfitThemeDark">
         <item name="android:windowBackground">@android:color/black</item>
         <item name="android:navigationBarColor">@android:color/black</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
     </style>
 
     <!-- Material 3 dynamic color (Material You) themes -->
-    <style name="GadgetbridgeThemeDynamicLight" parent="Theme.Material3.DynamicColors.Light">
+    <style name="gadgetfitThemeDynamicLight" parent="Theme.Material3.DynamicColors.Light">
         <item name="textColorPrimary">@color/primarytext_light</item>
-        <item name="actionBarStyle">@style/GadgetbridgeThemeDynamic.ActionBar</item>
-        <item name="actionOverflowMenuStyle">@style/GadgetbridgeTheme.OverflowMenuStyle</item>
+        <item name="actionBarStyle">@style/gadgetfitThemeDynamic.ActionBar</item>
+        <item name="actionOverflowMenuStyle">@style/gadgetfitTheme.OverflowMenuStyle</item>
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="android:colorControlHighlight">?attr/colorPrimary</item>
@@ -124,10 +124,10 @@
         <item name="deviceIconDark">?attr/colorPrimaryDark</item>
         <item name="spo2_avg_color">@color/spo2_avg_color_light</item>
     </style>
-    <style name="GadgetbridgeThemeDynamicDark" parent="Theme.Material3.DynamicColors.Dark">
+    <style name="gadgetfitThemeDynamicDark" parent="Theme.Material3.DynamicColors.Dark">
         <item name="textColorPrimary">@color/primarytext_dark</item>
-        <item name="actionBarStyle">@style/GadgetbridgeThemeDynamic.ActionBar</item>
-        <item name="actionOverflowMenuStyle">@style/GadgetbridgeTheme.OverflowMenuStyle</item>
+        <item name="actionBarStyle">@style/gadgetfitThemeDynamic.ActionBar</item>
+        <item name="actionOverflowMenuStyle">@style/gadgetfitTheme.OverflowMenuStyle</item>
         <item name="android:statusBarColor">?attr/colorSurface</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
         <item name="android:colorControlHighlight">?attr/colorPrimary</item>
@@ -147,65 +147,65 @@
         <item name="deviceIconDark">?attr/colorPrimaryDark</item>
         <item name="spo2_avg_color">@color/spo2_avg_color_dark</item>
     </style>
-    <style name="GadgetbridgeThemeDynamicDarkAmoled" parent="GadgetbridgeThemeDynamicDark">
+    <style name="gadgetfitThemeDynamicDarkAmoled" parent="gadgetfitThemeDynamicDark">
         <item name="android:windowBackground">@android:color/black</item>
     </style>
 
     <!-- theme variants without action bar -->
-    <style name="GadgetbridgeTheme.NoActionBar">
+    <style name="gadgetfitTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="GadgetbridgeThemeDark.NoActionBar">
+    <style name="gadgetfitThemeDark.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="GadgetbridgeThemeBlack.NoActionBar">
+    <style name="gadgetfitThemeBlack.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="GadgetbridgeThemeDynamicLight.NoActionBar">
+    <style name="gadgetfitThemeDynamicLight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="GadgetbridgeThemeDynamicDark.NoActionBar">
+    <style name="gadgetfitThemeDynamicDark.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="GadgetbridgeThemeDynamicDarkAmoled.NoActionBar">
+    <style name="gadgetfitThemeDynamicDarkAmoled.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
     <!-- action bar styles -->
-    <style name="GadgetbridgeTheme.RedActionBar" parent="Widget.Material3.ActionBar.Solid">
-        <item name="titleTextStyle">@style/GadgetbridgeTheme.ActionBarTitleStyle</item>
+    <style name="gadgetfitTheme.RedActionBar" parent="Widget.Material3.ActionBar.Solid">
+        <item name="titleTextStyle">@style/gadgetfitTheme.ActionBarTitleStyle</item>
         <item name="background">@color/primarydark_dark</item>
     </style>
-    <style name="GadgetbridgeThemeDynamic.ActionBar" parent="Widget.Material3.ActionBar.Solid">
+    <style name="gadgetfitThemeDynamic.ActionBar" parent="Widget.Material3.ActionBar.Solid">
         <item name="background">?attr/colorSurface</item>
         <item name="elevation">0dp</item>
     </style>
-    <style name="GadgetbridgeTheme.DrawerButtonStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+    <style name="gadgetfitTheme.DrawerButtonStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@android:color/white</item>
     </style>
-    <style name="GadgetbridgeTheme.NavigationButtonStyle" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+    <style name="gadgetfitTheme.NavigationButtonStyle" parent="Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="tint">@android:color/white</item>
     </style>
-    <style name="GadgetbridgeTheme.OverflowMenuButton" parent="Widget.AppCompat.ActionButton.Overflow">
+    <style name="gadgetfitTheme.OverflowMenuButton" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="tint">@android:color/white</item>
     </style>
-    <style name="GadgetbridgeTheme.ActionBarTitleStyle" parent="TextAppearance.Material3.ActionBar.Title">
+    <style name="gadgetfitTheme.ActionBarTitleStyle" parent="TextAppearance.Material3.ActionBar.Title">
         <item name="android:textColor">@color/primarytext_dark</item>
     </style>
-    <style name="GadgetbridgeTheme.OverflowMenuStyle" parent="Widget.Material3.PopupMenu.Overflow">
+    <style name="gadgetfitTheme.OverflowMenuStyle" parent="Widget.Material3.PopupMenu.Overflow">
         <item name="android:popupBackground">?attr/colorSecondaryContainer</item>
         <item name="android:textColorPrimary">?attr/colorOnSecondaryContainer</item>
     </style>
 
     <!-- splash screen -->
-    <style name="SplashTheme" parent="GadgetbridgeTheme.NoActionBar">
+    <style name="SplashTheme" parent="gadgetfitTheme.NoActionBar">
         <item name="android:statusBarColor">@color/primarydark_dark</item>
         <item name="android:navigationBarColor">@color/primarydark_dark</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>

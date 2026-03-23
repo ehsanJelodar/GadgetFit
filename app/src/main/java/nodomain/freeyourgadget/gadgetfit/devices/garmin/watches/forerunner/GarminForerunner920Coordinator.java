@@ -1,0 +1,77 @@
+/*  Copyright (C) 2026 Andreas Shimokawa
+
+    This file is part of gadgetbridge.
+
+    gadgetbridge is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    gadgetbridge is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>. */
+package nodomain.freeyourgadget.gadgetfit.devices.garmin.watches.forerunner;
+
+import androidx.annotation.NonNull;
+
+import java.util.regex.Pattern;
+
+import nodomain.freeyourgadget.gadgetfit.R;
+import nodomain.freeyourgadget.gadgetfit.devices.garmin.watches.GarminWatchCoordinator;
+import nodomain.freeyourgadget.gadgetfit.impl.GBDevice;
+
+public class GarminForerunner920Coordinator extends GarminWatchCoordinator {
+    @Override
+    protected Pattern getSupportedDeviceName() {
+        return Pattern.compile("^Forerunner 920$");
+    }
+
+    @Override
+    public int getDeviceNameResource() {
+        return R.string.devicetype_garmin_forerunner_920;
+    }
+
+    @Override
+    public boolean supportsTrainingLoad(@NonNull final GBDevice device) {
+        return false;
+    }
+
+    @Override
+    public boolean supportsSpo2(@NonNull final GBDevice device) {
+        return false;
+    }
+
+    @Override
+    public boolean supportsBodyEnergy(@NonNull final GBDevice device) {
+        return false;
+    }
+
+    @Override
+    public boolean supportsStressMeasurement(@NonNull final GBDevice device) {
+        return false;
+    }
+
+    @Override
+    public boolean supportsWeather(@NonNull final GBDevice device) {
+        return false;
+    }
+
+    @Override
+    public boolean supportsPai(@NonNull final GBDevice device) {
+        return false;
+    }
+
+    @Override
+    public boolean supportsHrvMeasurement(@NonNull final GBDevice device) {
+        return false;
+    }
+
+    @Override
+    public boolean supportsRespiratoryRate(@NonNull final GBDevice device) {
+        return false;
+    }
+}

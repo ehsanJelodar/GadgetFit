@@ -1,0 +1,54 @@
+/*  Copyright (C) 2025 Me7c7
+
+    This file is part of gadgetbridge.
+
+    gadgetbridge is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    gadgetbridge is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>. */
+package nodomain.freeyourgadget.gadgetfit.service.devices.huawei.requests;
+
+import java.util.List;
+
+import nodomain.freeyourgadget.gadgetfit.devices.huawei.HuaweiPacket;
+import nodomain.freeyourgadget.gadgetfit.devices.huawei.packets.DataSync;
+import nodomain.freeyourgadget.gadgetfit.service.devices.huawei.HuaweiSupportProvider;
+import nodomain.freeyourgadget.gadgetfit.service.devices.huawei.datasync.HuaweiDataSyncCommon;
+
+public class SendDataSyncConfigCommand extends Request {
+
+    private final String srcPackage;
+    private final String dstPackage;
+    private final HuaweiDataSyncCommon.ConfigCommandData data;
+
+    public SendDataSyncConfigCommand(HuaweiSupportProvider support,
+                                     String srcPackage,
+                                     String dstPackage,
+                                     HuaweiDataSyncCommon.ConfigCommandData data) {
+        super(support);
+        this.serviceId = DataSync.id;
+        this.commandId = DataSync.ConfigCommand.id;
+
+        this.srcPackage = srcPackage;
+        this.dstPackage = dstPackage;
+        this.data = data;
+        this.addToResponse = false;
+    }
+
+    @Override
+    protected List<byte[]> createRequest() throws RequestCreationException {
+        try {
+            return new DataSync.ConfigCommand.Request(paramsProvider, this.srcPackage, this.dstPackage, this.data).serialize();
+        } catch (HuaweiPacket.CryptoException e) {
+            throw new RequestCreationException(e);
+        }
+    }
+}

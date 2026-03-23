@@ -4,7 +4,7 @@ plugins {
     id 'application'
 }
 
-base.archivesName = 'gadgetbridge-daogenerator'
+base.archivesName = 'gadgetfit-daogenerator'
 
 dependencies {
     // https://codeberg.org/Freeyourgadget/greenDao
@@ -25,7 +25,7 @@ sourceSets {
     }
 }
 
-application.mainClass = "nodomain.freeyourgadget.gadgetbridge.daogen.GBDaoGenerator"
+application.mainClass = "nodomain.freeyourgadget.gadgetfit.daogen.GBDaoGenerator"
 
 tasks.register('genSources', JavaExec) {
     inputs.dir(file("src"))

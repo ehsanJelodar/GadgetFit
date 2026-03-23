@@ -100,22 +100,22 @@ android {
         jvmTarget = JavaVersion.VERSION_17
     }
 
-    namespace = 'nodomain.freeyourgadget.gadgetbridge'
+    namespace = 'nodomain.freeyourgadget.gadgetfit'
     compileSdk = 36
     buildToolsVersion = '36.0.0'
 
     defaultConfig {
-        applicationId "nodomain.freeyourgadget.gadgetbridge"
+        applicationId "nodomain.freeyourgadget.gadgetfit"
 
         // Note: update toolchain.languageVersion when changing targetSdk
         //noinspection OldTargetApi
         targetSdk = 34
         // Note: update sourceCompatibility and targetCompatibility when changing minSdk
-        minSdk = 23
+        minSdk = 26
 
         // Note: always bump BOTH versionCode and versionName!
-        versionName "0.88.0"
-        versionCode 243
+        versionName "0.1.0"
+        versionCode 1
         vectorDrawables.useSupportLibrary = true
         buildConfigField "String", "GIT_HASH_SHORT", "\"${getGitHashShort()}\""
         buildConfigField "boolean", "INTERNET_ACCESS", "false"
@@ -145,7 +145,7 @@ android {
 
         banglejs {
             dimension "device_type"
-            applicationId "com.espruino.gadgetbridge"
+            applicationId "com.espruino.gadgetfit"
             applicationIdSuffix ".banglejs"
             versionNameSuffix "-banglejs"
             buildConfigField "boolean", "INTERNET_ACCESS", "true"
@@ -324,7 +324,7 @@ gradle.beforeProject {
 }
 
 tasks.register('cleanGenerated', Delete) {
-    delete fileTree('src/main/java/nodomain/freeyourgadget/gadgetbridge/entities') {
+    delete fileTree('src/main/java/nodomain/freeyourgadget/gadgetfit/entities') {
         include '**/*.java'
         exclude '**/Abstract*.java'
         exclude '**/GenericActivitySample.java'

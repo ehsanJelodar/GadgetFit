@@ -8,7 +8,7 @@
             android:icon="@drawable/ic_database"
             android:title="@string/pref_header_auto_export_db">
             <intent
-                android:targetClass="nodomain.freeyourgadget.gadgetbridge.activities.automations.AutoExportDbSettingsActivity"
+                android:targetClass="nodomain.freeyourgadget.gadgetfit.activities.automations.AutoExportDbSettingsActivity"
                 android:targetPackage="@string/applicationId" />
         </Preference>
 
@@ -16,7 +16,7 @@
             android:icon="@drawable/ic_zip"
             android:title="@string/pref_header_auto_export_zip">
             <intent
-                android:targetClass="nodomain.freeyourgadget.gadgetbridge.activities.automations.AutoExportZipSettingsActivity"
+                android:targetClass="nodomain.freeyourgadget.gadgetfit.activities.automations.AutoExportZipSettingsActivity"
                 android:targetPackage="@string/applicationId" />
         </Preference>
 

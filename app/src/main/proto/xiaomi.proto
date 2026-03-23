@@ -6,7 +6,7 @@ package xiaomi;
 // set idea.max.intellisense.filesize=5000 in idea.properties
 // by clicking Help -> Edit Custom Properties
 
-option java_package = "nodomain.freeyourgadget.gadgetbridge.proto.xiaomi";
+option java_package = "nodomain.freeyourgadget.gadgetfit.proto.xiaomi";
 option java_outer_classname = "XiaomiProto";
 
 message Command {

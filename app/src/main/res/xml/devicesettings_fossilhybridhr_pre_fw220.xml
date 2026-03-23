@@ -8,7 +8,7 @@
         android:summary="@string/qhybrid_watchface_configuration_old_firmware">
         <intent
             android:targetPackage="@string/applicationId"
-            android:targetClass="nodomain.freeyourgadget.gadgetbridge.devices.qhybrid.HRConfigActivity" />
+            android:targetClass="nodomain.freeyourgadget.gadgetfit.devices.qhybrid.HRConfigActivity" />
     </Preference>
 
     <SwitchPreferenceCompat

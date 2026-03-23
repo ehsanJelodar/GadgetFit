@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * From 0eb681b, adapted for Gadgetbridge to support null labels.
+ * From 0eb681b, adapted for gadgetbridge to support null labels.
  */
 
 package com.google.gson.typeadapters;

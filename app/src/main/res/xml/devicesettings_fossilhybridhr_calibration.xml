@@ -7,7 +7,7 @@
         android:summary="@string/qhybrid_summary_calibration">
         <intent
             android:targetPackage="@string/applicationId"
-            android:targetClass="nodomain.freeyourgadget.gadgetbridge.devices.qhybrid.CalibrationActivity" />
+            android:targetClass="nodomain.freeyourgadget.gadgetfit.devices.qhybrid.CalibrationActivity" />
     </Preference>
 
 </androidx.preference.PreferenceScreen>

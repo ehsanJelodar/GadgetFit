@@ -61,7 +61,7 @@
             android:summary="@string/qhybrid_pref_summary_actions">
                 <intent
                     android:targetPackage="@string/applicationId"
-                    android:targetClass="nodomain.freeyourgadget.gadgetbridge.devices.qhybrid.CommuteActionsActivity" />
+                    android:targetClass="nodomain.freeyourgadget.gadgetfit.devices.qhybrid.CommuteActionsActivity" />
     </Preference>
 
 </androidx.preference.PreferenceScreen>

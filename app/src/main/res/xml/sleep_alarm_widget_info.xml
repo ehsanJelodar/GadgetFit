@@ -4,8 +4,8 @@
     android:initialLayout="@layout/sleep_alarm_widget"
     android:minHeight="40dp"
     android:minWidth="40dp"
-    android:previewImage="@drawable/ic_launcher"
+    android:previewImage="@drawable/ic_launcher_foreground"
     android:updatePeriodMillis="86400000"
-    android:configure="nodomain.freeyourgadget.gadgetbridge.activities.SleepAlarmWidgetConfigurationActivity"
+    android:configure="nodomain.freeyourgadget.gadgetfit.activities.SleepAlarmWidgetConfigurationActivity"
     android:widgetCategory="home_screen">
 </appwidget-provider>
