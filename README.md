@@ -1,8 +1,8 @@
 # GadgetFit
 A lightweight modified version of "Gadgetbridge" focused on improved performance and speed.
 
-Original project:
-https://codeberg.org/Freeyourgadget/Gadgetbridge
+###### Original project:
+###### [https://codeberg.org/Freeyourgadget/Gadgetbridge](https://codeberg.org/Freeyourgadget/Gadgetbridge)
 
 License: GNU Affero General Public License v3 (AGPL-3.0).
 
