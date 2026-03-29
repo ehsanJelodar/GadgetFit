@@ -114,7 +114,6 @@ import nodomain.freeyourgadget.gadgetfit.model.NotificationSpec;
 import nodomain.freeyourgadget.gadgetfit.model.NotificationType;
 import nodomain.freeyourgadget.gadgetfit.model.Reminder;
 import nodomain.freeyourgadget.gadgetfit.model.WorldClock;
-import nodomain.freeyourgadget.gadgetfit.service.btle.BLEScanService;
 import nodomain.freeyourgadget.gadgetfit.service.receivers.AutoConnectIntervalReceiver;
 import nodomain.freeyourgadget.gadgetfit.service.receivers.GBAutoFetchReceiver;
 import nodomain.freeyourgadget.gadgetfit.util.EmojiConverter;
@@ -436,7 +435,9 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
                 } else if(subject == GBDevice.DeviceUpdateSubject.DEVICE_STATE && (device.getState() == GBDevice.State.SCANNED)) {
                     sendDeviceAPIBroadcast(device.getAddress(), API_LEGACY_ACTION_DEVICE_SCANNED);
                 }
-            } else if(BLEScanService.EVENT_DEVICE_FOUND.equals(action)){
+            }
+            /// extra device search
+            /*== else if(BLEScanService.EVENT_DEVICE_FOUND.equals(action)){
                 String deviceAddress = intent.getStringExtra(BLEScanService.EXTRA_DEVICE_ADDRESS);
 
                 GBDevice target = GBApplication
@@ -487,8 +488,10 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
 
                 connectToDevice(target, false);
             }
+ */
         }
     };
+
 
     private void updateReceiversState(){
         boolean enableReceivers = false;
@@ -521,8 +524,9 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
     private void registerInternalReceivers(){
         IntentFilter localFilter = new IntentFilter();
         localFilter.addAction(GBDevice.ACTION_DEVICE_CHANGED);
-        localFilter.addAction(BLEScanService.EVENT_DEVICE_FOUND);
+     //=   localFilter.addAction(BLEScanService.EVENT_DEVICE_FOUND);
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, localFilter);
+
     }
 
     private void registerExternalReceivers(){
@@ -563,15 +567,20 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
             getPrefs().getPreferences().registerOnSharedPreferenceChangeListener(this);
             allowBluetoothIntentApi = getPrefs().getBoolean(GBPrefs.PREF_ALLOW_INTENT_API, false);
             reconnectViaScan = getPrefs().getAutoReconnectByScan();
+            //=LOG.debug("tesssst {}", reconnectViaScan);
         }
 
         startForeground();
-        if(reconnectViaScan) {
-            scanAllDevices();
+        scanAllDevices();
 
-            Intent scanServiceIntent = new Intent(this, BLEScanService.class);
-            startService(scanServiceIntent);
-        }
+      //=  if(reconnectViaScan) {
+      //=      scanAllDevices();
+           //= Intent scanServiceIntent = new Intent(this, BLEScanService.class);
+           //= startService(scanServiceIntent);
+      //=  }
+       //= else { // esd add for test
+        //=    scanAllDevices();
+       //= }
     }
 
     private void scanAllDevices(){

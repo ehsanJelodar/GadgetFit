@@ -415,15 +415,26 @@ public final class BtLEQueue implements Thread.UncaughtExceptionHandler {
         boolean forceDisconnect;
         //noinspection EnhancedSwitchMigration
         switch(status) {
-            case 0x81: // 0x81 129 GATT_INTERNAL_ERROR
+
+            //= we can reconnect for these:
+            // {
+            //case 133:     // treat as recoverable → retry
+            //case 8:  // BluetoothGatt.GATT_INSUFFICIENT_AUTHORIZATION  // auth timeout sometimes
+            //case 147:  //BluetoothGatt.GATT_CONNECTION_TIMEOUT // timeout
+           // case 257: //BluetoothGatt.GATT_FAILURE// generic failure
+            //}
+
             case 0x85: // 0x85 133 GATT_ERROR
                 // Bluetooth stack has a fundamental problem:
             case 0x8: // BluetoothGatt.GATT_INSUFFICIENT_AUTHORIZATION only on API 35
-            case BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION:
-            case BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION:
                 // a Bluetooth bonding / pairing issue
                 // some devices report AUTHORIZATION instead of TIMEOUT during connection setup
             case 0x93: // BluetoothGatt.GATT_CONNECTION_TIMEOUT only on API 35
+
+
+            case 0x81: // 0x81 129 GATT_INTERNAL_ERROR
+            case BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION: //5
+            case BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION: //15
                 forceDisconnect = true;
                 break;
             default:
@@ -438,8 +449,7 @@ public final class BtLEQueue implements Thread.UncaughtExceptionHandler {
             if (mBluetoothGatt != null) {
                 device = mBluetoothGatt.getDevice();
             }
-            LOG.warn("unhealthy disconnect {} {}", device == null ?  "<UNKNOWN>" : device.getAddress(),
-                    BleNamesResolver.getStatusString(status));
+            LOG.warn("unhealthy disconnect {} {}", device == null ?  "<UNKNOWN>" : device.getAddress(), BleNamesResolver.getStatusString(status));
         } else if (mBluetoothGatt != null) {
             // try to reconnect immediately
             if (mDeviceSupport.getAutoReconnect()) {
@@ -572,6 +582,7 @@ public final class BtLEQueue implements Thread.UncaughtExceptionHandler {
         return true;
     }
 
+    //= Handles outgoing connections (phone → device)
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
     private final class InternalGattCallback extends BluetoothGattCallback {
@@ -1011,7 +1022,7 @@ public final class BtLEQueue implements Thread.UncaughtExceptionHandler {
             return EMPTY;
         }
     }
-
+    //= Handles incoming connections (device → phone)
     // Implements callback methods for GATT server events that the app cares about.  For example,
     // connection change and read/write requests.
     private final class InternalGattServerCallback extends BluetoothGattServerCallback {

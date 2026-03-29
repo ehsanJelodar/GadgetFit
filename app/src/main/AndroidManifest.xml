@@ -632,11 +632,12 @@
             android:label="PineTime Nordic DFU service"
             android:foregroundServiceType="connectedDevice" />
 
-        <service
+    <!--<service
             android:name=".service.btle.BLEScanService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="connectedDevice" />
+        -->
 
         <service
             android:name=".service.GBCompanionDeviceService"

@@ -167,7 +167,7 @@ public class Prefs {
      * The preference is assumed to be a string, with each value separated by a comma.
      * @param key the preference key
      * @param defaultValue the default value to return if the preference value is unset
-     * @param separator the separator to use to split the string
+     * @param separatorRegex the separator to use to split the string
      * @return the saved preference value or the given defaultValue
      */
     public List<String> getList(final String key, final List<String> defaultValue, final String separatorRegex) {

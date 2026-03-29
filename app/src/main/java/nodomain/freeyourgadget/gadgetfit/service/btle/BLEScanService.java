@@ -58,7 +58,8 @@ import nodomain.freeyourgadget.gadgetfit.GBApplication;
 import nodomain.freeyourgadget.gadgetfit.R;
 import nodomain.freeyourgadget.gadgetfit.impl.GBDevice;
 import nodomain.freeyourgadget.gadgetfit.util.GB;
-
+/*==
+/// = esd can be deleted.
 public class BLEScanService extends Service {
     public static final String COMMAND_SCAN_DEVICE = "nodomain.freeyourgadget.gadgetfit.service.ble.scan.command.START_SCAN_FOR_DEVICE";
     public static final String COMMAND_START_SCAN_ALL = "nodomain.freeyourgadget.gadgetfit.service.ble.scan.command.START_SCAN_ALL";
@@ -72,7 +73,7 @@ public class BLEScanService extends Service {
     public static final String EXTRA_MANUFACTURER_SPECIFIC_DATA = "EXTRA_MANUFACTURER_SPECIFIC_DATA";
 
     // 5 minutes scan restart interval
-    private final int DELAY_SCAN_RESTART = 5 * 60 * 1000;
+    //=private final int DELAY_SCAN_RESTART = 5 * 60 * 1000;
 
     private LocalBroadcastManager localBroadcastManager;
     private NotificationManager notificationManager;
@@ -165,7 +166,7 @@ public class BLEScanService extends Service {
     }
 
     private void scheduleRestartScan() {
-        scheduleRestartScan(DELAY_SCAN_RESTART);
+    //=    scheduleRestartScan(DELAY_SCAN_RESTART);
     }
 
     private void scheduleRestartScan(long millis) {
@@ -452,3 +453,4 @@ public class BLEScanService extends Service {
         super.onTimeout(startId, fgsType);
     }
 }
+*/
