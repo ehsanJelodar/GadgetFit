@@ -305,7 +305,6 @@ public class GBApplication extends Application {
 
         deviceService = createDeviceService();
         loadAppsNotifBlackList();
-        loadAppsPebbleBlackList();
 
         if (!GBEnvironment.env().isTest()) {
             PeriodicDbExporter.INSTANCE.scheduleNextExecution(context);
@@ -638,74 +637,6 @@ public class GBApplication extends Application {
         GB.log("Removing from apps_notification_blacklist: " + packageName, GB.INFO, null);
         apps_notification_blacklist.remove(packageName);
         saveAppsNotifBlackList();
-    }
-
-    private static HashSet<String> apps_pebblemsg_blacklist = null;
-
-    public static boolean appIsPebbleBlacklisted(String sender) {
-        if (apps_pebblemsg_blacklist == null) {
-            GB.log("appIsPebbleBlacklisted: apps_pebblemsg_blacklist is null!", GB.INFO, null);
-        }
-        return apps_pebblemsg_blacklist != null && apps_pebblemsg_blacklist.contains(sender);
-    }
-
-    public static void setAppsPebbleBlackList(Set<String> packageNames) {
-        setAppsPebbleBlackList(packageNames, sharedPrefs.edit());
-    }
-
-    public static void setAppsPebbleBlackList(Set<String> packageNames, SharedPreferences.Editor editor) {
-        if (packageNames == null) {
-            GB.log("Set null apps_pebblemsg_blacklist", GB.INFO, null);
-            apps_pebblemsg_blacklist = new HashSet<>();
-        } else {
-            apps_pebblemsg_blacklist = new HashSet<>(packageNames);
-        }
-        GB.log("New apps_pebblemsg_blacklist has " + apps_pebblemsg_blacklist.size() + " entries", GB.INFO, null);
-        saveAppsPebbleBlackList(editor);
-    }
-
-    private static void loadAppsPebbleBlackList() {
-        GB.log("Loading apps_pebblemsg_blacklist", GB.INFO, null);
-        apps_pebblemsg_blacklist = (HashSet<String>) sharedPrefs.getStringSet(GBPrefs.PACKAGE_PEBBLEMSG_BLACKLIST, null); // lgtm [java/abstract-to-concrete-cast]
-        if (apps_pebblemsg_blacklist == null) {
-            apps_pebblemsg_blacklist = new HashSet<>();
-        }
-        GB.log("Loaded apps_pebblemsg_blacklist has " + apps_pebblemsg_blacklist.size() + " entries", GB.INFO, null);
-    }
-
-    private static void saveAppsPebbleBlackList() {
-        saveAppsPebbleBlackList(sharedPrefs.edit());
-    }
-
-    private static void saveAppsPebbleBlackList(SharedPreferences.Editor editor) {
-        GB.log("Saving apps_pebblemsg_blacklist with " + apps_pebblemsg_blacklist.size() + " entries", GB.INFO, null);
-        if (apps_pebblemsg_blacklist.isEmpty()) {
-            editor.putStringSet(GBPrefs.PACKAGE_PEBBLEMSG_BLACKLIST, null);
-        } else {
-            Prefs.putStringSet(editor, GBPrefs.PACKAGE_PEBBLEMSG_BLACKLIST, apps_pebblemsg_blacklist);
-        }
-        editor.apply();
-    }
-
-    public static void addAppToPebbleBlacklist(String packageName) {
-        if (apps_pebblemsg_blacklist.add(packageNameToPebbleMsgSender(packageName))) {
-            saveAppsPebbleBlackList();
-        }
-    }
-
-    public static synchronized void removeFromAppsPebbleBlacklist(String packageName) {
-        GB.log("Removing from apps_pebblemsg_blacklist: " + packageName, GB.INFO, null);
-        apps_pebblemsg_blacklist.remove(packageNameToPebbleMsgSender(packageName));
-        saveAppsPebbleBlackList();
-    }
-
-    public static String packageNameToPebbleMsgSender(String packageName) {
-        if ("eu.siacs.conversations".equals(packageName)) {
-            return ("Conversations");
-        } else if ("net.osmand.plus".equals(packageName)) {
-            return ("OsmAnd");
-        }
-        return packageName;
     }
 
     /**

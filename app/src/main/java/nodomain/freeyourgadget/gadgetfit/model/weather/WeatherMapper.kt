@@ -157,38 +157,6 @@ object WeatherMapper {
         else      -> context.getString(R.string.aqi_level_dangerous)
     }
 
-    @JvmStatic
-    fun mapToPebbleCondition(openWeatherMapCondition: Int): Byte {
-        /* deducted values:
-    0 = sun + cloud
-    1 = clouds
-    2 = some snow
-    3 = some rain
-    4 = heavy rain
-    5 = heavy snow
-    6 = sun + cloud + rain (default icon?)
-    7 = sun
-    8 = rain + snow
-    9 = 6
-    10, 11, ... = empty icon
- */
-        return when (openWeatherMapCondition) {
-            200, 201, 202, 210, 211, 230, 231, 232, 212, 221 -> 4
-            300, 301, 302, 310, 311, 312, 313, 314, 321, 500, 501 -> 3
-            502, 503, 504, 511, 520, 521, 522, 531 -> 4
-            600, 601, 620 -> 2
-            602, 611, 612, 621, 622 -> 5
-            615, 616 -> 8
-            701, 711, 721, 731, 741, 751, 761, 762, 771, 781, 900 -> 6
-            800 -> 7
-            801, 802 -> 0
-            803, 804 -> 1
-            901, 903, 904, 905, 906, 951, 952, 953, 954, 955, 956, 957, 958, 959, 960, 961, 902, 962 -> 6
-
-            else -> 6
-
-        }
-    }
 
     @JvmStatic
     fun mapToYahooCondition(openWeatherMapCondition: Int): Int {

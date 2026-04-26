@@ -90,9 +90,19 @@ public class BondingUtil {
                         if (device.isInitialized()) {
                             LOG.info("Device is initialized, finish things up");
                             activity.onBondingComplete(true);
-                        } else if (device.isConnecting() || device.isInitializing()) {
+                        }
+                        else if(device.getState() == GBDevice.State.AUTHENTICATION_REQUIRED) //esd add
+                        {
+                            //ShowText(R.string.wrong_authenticating_code, ToastType.ERROR);
+                            Toast.makeText(activity.getContext(), R.string.wrong_authenticating_code , Toast.LENGTH_LONG).show();
+                            //pairingFinished(false);
+                            activity.onBondingComplete(false);
+
+                        }
+                        else if (device.isConnecting() || device.isInitializing()) {
                             LOG.info("Still connecting/initializing device...");
                         }
+                        LOG.info("device State... "+device.getState());
                     }
                 }
             }
@@ -135,7 +145,7 @@ public class BondingUtil {
                             case BluetoothDevice.BOND_BONDED: {
                                 LOG.info("Bonded with {}", device.getAddress());
                                 //noinspection StatementWithEmptyBody
-                                if (isLePebble(device) || isPebble2(device) || !bondingInterface.getAttemptToConnect()) {
+                                if (!bondingInterface.getAttemptToConnect()) {
                                     // Do not initiate connection to LE Pebble and some others!
                                 } else {
                                     attemptToFirstConnect(device);
@@ -330,27 +340,12 @@ public class BondingUtil {
         }
     }
 
-    /**
-     * Checks if device is LE Pebble
-     */
-    public static boolean isLePebble(BluetoothDevice device) {
-        return (device.getType() == BluetoothDevice.DEVICE_TYPE_DUAL || device.getType() == BluetoothDevice.DEVICE_TYPE_LE) &&
-                (device.getName().startsWith("Pebble-LE ") || device.getName().startsWith("Pebble Time LE "));
-    }
 
-    /**
-     * Checks if device is Pebble 2
-     */
-    public static boolean isPebble2(BluetoothDevice device) {
-        return device.getType() == BluetoothDevice.DEVICE_TYPE_LE &&
-                device.getName().startsWith("Pebble ") &&
-                !device.getName().startsWith("Pebble Time LE ");
-    }
 
     /**
      * Uses the CompanionDeviceManager bonding method
      */
-    @RequiresApi(Build.VERSION_CODES.O)
+    
     private static void companionDeviceManagerBond(BondingInterface bondingInterface,
                                                    BluetoothDevice device) {
         final String macAddress = device.getAddress();
@@ -445,7 +440,7 @@ public class BondingUtil {
 
         if (bondState == BluetoothDevice.BOND_BONDED) {
             GB.toast(bondingInterface.getContext().getString(R.string.pairing_already_bonded, device.getName(), device.getAddress()), Toast.LENGTH_SHORT, GB.INFO);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !isPebble2(device) && contextIsActivity) {
+            if (contextIsActivity) {
                 // If CompanionDeviceManager is available, skip connection and go bond
                 // TODO: It would theoretically be nice to check if it's already been granted,
                 //  but re-bond works
@@ -458,19 +453,15 @@ public class BondingUtil {
 
         GB.toast(bondingInterface.getContext(), bondingInterface.getContext().getString(R.string.pairing_creating_bond_with, device.getName(), device.getAddress()), Toast.LENGTH_LONG, GB.INFO);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !isPebble2(device) && contextIsActivity) {
+        if (contextIsActivity) {
             askCompanionPairing(bondingInterface, device);
-        } else if (isPebble2(device)) {
-            // TODO: start companionDevicePairing after connecting to Pebble 2 but before writing to pairing trigger
-            attemptToFirstConnect(device);
-        } else {
+        }else {
             bluetoothBond(bondingInterface, device);
         }
 
         GB.toast(bondingInterface.getContext(), bondingInterface.getContext().getString(R.string.pairing_bonding_under_way), Toast.LENGTH_LONG, GB.INFO);
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private static void askCompanionPairing(BondingInterface bondingInterface, BluetoothDevice device) {
         new MaterialAlertDialogBuilder(bondingInterface.getContext())
                 .setTitle(R.string.companion_pairing_request_title)
@@ -490,7 +481,6 @@ public class BondingUtil {
      * @param bondingInterface the activity that started the CDM bonding process
      * @return CompanionDeviceManager.Callback that handles the CompanionDeviceManager bonding process results
      */
-    @RequiresApi(Build.VERSION_CODES.O)
     private static CompanionDeviceManager.Callback getCompanionDeviceManagerCallback(final BondingInterface bondingInterface) {
         return new CompanionDeviceManager.Callback() {
             @Override
@@ -606,11 +596,6 @@ public class BondingUtil {
     }
 
     public static boolean Disassociate(Context context, String mac) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            LOG.info("Disassociate - API {} < {} is too old",
-                    Build.VERSION.SDK_INT, Build.VERSION_CODES.O);
-            return false;
-        }
 
         if (!BluetoothAdapter.checkBluetoothAddress(mac)) {
             LOG.warn("Disassociate - mac '{}' is invalid", mac);
@@ -799,9 +784,6 @@ public class BondingUtil {
     public static CompanionDeviceManager getCompanionDeviceManager(Context context) {
         if (context == null) {
             LOG.error("getCompanionDeviceManager - context is null");
-        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            LOG.debug("getCompanionDeviceManager - API {} < {} is too old",
-                    Build.VERSION.SDK_INT, Build.VERSION_CODES.O);
         } else {
             final CompanionDeviceManager manager = (CompanionDeviceManager) context.getSystemService(Context.COMPANION_DEVICE_SERVICE);
             if (manager != null) {

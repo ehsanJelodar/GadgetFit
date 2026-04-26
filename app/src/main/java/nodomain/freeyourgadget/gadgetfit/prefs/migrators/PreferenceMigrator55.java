@@ -10,7 +10,6 @@ import static nodomain.freeyourgadget.gadgetfit.model.DeviceType.MIBAND;
 import static nodomain.freeyourgadget.gadgetfit.model.DeviceType.MIBAND2;
 import static nodomain.freeyourgadget.gadgetfit.model.DeviceType.MIBAND2_HRX;
 import static nodomain.freeyourgadget.gadgetfit.model.DeviceType.MIBAND3;
-import static nodomain.freeyourgadget.gadgetfit.model.DeviceType.PEBBLE;
 import static nodomain.freeyourgadget.gadgetfit.model.DeviceType.TLW64;
 import static nodomain.freeyourgadget.gadgetfit.model.DeviceType.WATCHXPLUS;
 
@@ -313,18 +312,7 @@ public class PreferenceMigrator55 extends AbstractPreferenceMigrator {
         }
 
         if (oldVersion < 8) {
-            for (int i = 1; i <= 16; i++) {
-                String message = prefs.getString("canned_message_dismisscall_" + i, null);
-                if (message != null) {
-                    migrateStringPrefToPerDevicePref("canned_message_dismisscall_" + i, "", "canned_message_dismisscall_" + i, new ArrayList<>(Collections.singletonList(PEBBLE)));
-                }
-            }
-            for (int i = 1; i <= 16; i++) {
-                String message = prefs.getString("canned_reply_" + i, null);
-                if (message != null) {
-                    migrateStringPrefToPerDevicePref("canned_reply_" + i, "", "canned_reply_" + i, new ArrayList<>(Collections.singletonList(PEBBLE)));
-                }
-            }
+           //=pebble
         }
         if (oldVersion < 9) {
             try (DBHandler db = acquireDB()) {
@@ -1033,40 +1021,7 @@ public class PreferenceMigrator55 extends AbstractPreferenceMigrator {
             }
         }
         if (oldVersion < 36) {
-            // Migrate Pebble preferences to device-specific
-            try (DBHandler db = acquireDB()) {
-                final DaoSession daoSession = db.getDaoSession();
-                final List<Device> activeDevices = DBHelper.getActiveDevices(daoSession);
-
-                for (Device dbDevice : activeDevices) {
-                    final DeviceType deviceType = DeviceType.fromName(dbDevice.getTypeName());
-                    if (deviceType == PEBBLE) {
-                        final SharedPreferences deviceSharedPrefs = GBApplication.getDeviceSpecificSharedPrefs(dbDevice.getIdentifier());
-                        final SharedPreferences.Editor deviceSharedPrefsEdit = deviceSharedPrefs.edit();
-
-                        deviceSharedPrefsEdit.putBoolean("pebble_enable_outgoing_call", sharedPrefs.getBoolean("pebble_enable_outgoing_call", true));
-                        deviceSharedPrefsEdit.putString("pebble_pref_privacy_mode", sharedPrefs.getString("pebble_pref_privacy_mode", "off"));
-                        deviceSharedPrefsEdit.putBoolean("send_sunrise_sunset", sharedPrefs.getBoolean("send_sunrise_sunset", false));
-                        deviceSharedPrefsEdit.putString("pebble_activitytracker", sharedPrefs.getString("pebble_activitytracker", String.valueOf(SampleProvider.PROVIDER_PEBBLE_HEALTH)));
-                        deviceSharedPrefsEdit.putBoolean("pebble_sync_health", sharedPrefs.getBoolean("pebble_sync_health", true));
-                        deviceSharedPrefsEdit.putBoolean("pebble_health_store_raw", sharedPrefs.getBoolean("pebble_health_store_raw", true));
-                        deviceSharedPrefsEdit.putBoolean("pebble_sync_misfit", sharedPrefs.getBoolean("pebble_sync_misfit", true));
-                        deviceSharedPrefsEdit.putBoolean("pebble_sync_morpheuz", sharedPrefs.getBoolean("pebble_sync_morpheuz", true));
-                        deviceSharedPrefsEdit.putBoolean("pebble_force_untested", sharedPrefs.getBoolean("pebble_force_untested", false));
-                        deviceSharedPrefsEdit.putBoolean("pebble_force_le", sharedPrefs.getBoolean("pebble_force_le", false));
-                        deviceSharedPrefsEdit.putString("pebble_mtu_limit", sharedPrefs.getString("pebble_mtu_limit", "512"));
-                        deviceSharedPrefsEdit.putBoolean("pebble_gatt_clientonly", sharedPrefs.getBoolean("pebble_gatt_clientonly", false));
-                        deviceSharedPrefsEdit.putBoolean("pebble_enable_applogs", sharedPrefs.getBoolean("pebble_enable_applogs", false));
-                        deviceSharedPrefsEdit.putBoolean("third_party_apps_set_settings", sharedPrefs.getBoolean("pebble_enable_pebblekit", false));
-                        deviceSharedPrefsEdit.putBoolean("pebble_always_ack_pebblekit", sharedPrefs.getBoolean("pebble_always_ack_pebblekit", false));
-                        deviceSharedPrefsEdit.putBoolean("pebble_enable_background_javascript", sharedPrefs.getBoolean("pebble_enable_background_javascript", false));
-
-                        deviceSharedPrefsEdit.apply();
-                    }
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "Failed to migrate prefs to version 36", e);
-            }
+            //= Migrate Pebble preferences to device-specific
         }
 
         if (oldVersion < 37) {

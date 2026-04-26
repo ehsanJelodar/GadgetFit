@@ -217,13 +217,13 @@ public abstract class AbstractBTLEOperation<T extends AbstractBTLESingleDeviceSu
         mSupport.onReliableWriteCompleted(gatt, status);
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    
     @Override
     public void onPhyRead(BluetoothGatt gatt, int txPhy, int rxPhy, int status) {
         mSupport.onPhyRead(gatt, txPhy, rxPhy, status);
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    
     @Override
     public void onPhyUpdate(BluetoothGatt gatt, int txPhy, int rxPhy, int status) {
         mSupport.onPhyUpdate(gatt, txPhy, rxPhy, status);

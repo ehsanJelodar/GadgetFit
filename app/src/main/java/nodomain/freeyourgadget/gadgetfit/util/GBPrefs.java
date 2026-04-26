@@ -43,7 +43,6 @@ public class GBPrefs extends Prefs {
     private static final String TAG = "GBPrefs";
 
     public static final String PACKAGE_BLACKLIST = "package_blacklist";
-    public static final String PACKAGE_PEBBLEMSG_BLACKLIST = "package_pebblemsg_blacklist";
     public static final String CALENDAR_BLACKLIST = "calendar_blacklist";
     public static final String DEVICE_AUTO_RECONNECT = "prefs_key_device_auto_reconnect";
     public static final String DEVICE_CONNECT_BACK = "prefs_key_device_reconnect_on_acl";

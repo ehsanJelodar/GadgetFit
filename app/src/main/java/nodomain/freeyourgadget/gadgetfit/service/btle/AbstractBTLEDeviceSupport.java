@@ -71,9 +71,7 @@ public abstract class AbstractBTLEDeviceSupport extends AbstractDeviceSupport
      * @return milliseconds
      */
     public long getServiceDiscoveryDelay(boolean bonded) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            return bonded ? 1600L : 300L;
-        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             return 300L;
         } else {
             return bonded ? 1000L : 300L;

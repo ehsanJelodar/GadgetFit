@@ -35,7 +35,6 @@ class NotificationsDebugFragment : AbstractDebugFragment() {
         setPreferencesFromResource(R.xml.debug_preferences_notifications, null)
 
         onClick(PREF_DEBUG_NOTIFICATIONS_SEND) { sendNotificationSpec() }
-        onClick(PREF_DEBUG_PEBBLEKIT_NOTIFICATION) { testPebbleKitNotification() }
         onClick(PREF_DEBUG_CREATE_TEST_NOTIFICATION) { createTestNotification() }
         onClick(PREF_DEBUG_NOTIFICATIONS_RESET) { resetPreferences() }
 
@@ -213,20 +212,7 @@ class NotificationsDebugFragment : AbstractDebugFragment() {
         return null
     }
 
-    private fun testPebbleKitNotification() {
-        val pebbleKitIntent = Intent("com.getpebble.action.SEND_NOTIFICATION")
-        pebbleKitIntent.putExtra("messageType", "PEBBLE_ALERT")
-        pebbleKitIntent.putExtra(
-            "notificationData",
-            """
-                [{
-                    "title": "PebbleKitTest",
-                    "body": "Sent from gadgetfit"
-                }]
-            """.trimIndent()
-        )
-        GBApplication.getContext().sendBroadcast(pebbleKitIntent)
-    }
+
 
     private val mReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
@@ -250,7 +236,6 @@ class NotificationsDebugFragment : AbstractDebugFragment() {
         private const val ACTION_REPLY = "nodomain.freeyourgadget.gadgetfit.DebugActivity.action.reply"
 
         private const val PREF_DEBUG_NOTIFICATIONS_SEND = "pref_debug_notifications_send"
-        private const val PREF_DEBUG_PEBBLEKIT_NOTIFICATION = "pref_debug_pebblekit_notification"
         private const val PREF_DEBUG_CREATE_TEST_NOTIFICATION = "pref_debug_create_test_notification"
         private const val PREF_DEBUG_NOTIFICATIONS_RESET = "pref_debug_notifications_reset"
         private const val PREF_DEBUG_HEADER_CALLSPEC = "pref_header_callspec"

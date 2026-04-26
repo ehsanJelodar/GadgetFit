@@ -60,8 +60,6 @@ import nodomain.freeyourgadget.gadgetfit.entities.Device;
 import nodomain.freeyourgadget.gadgetfit.entities.DeviceAttributes;
 import nodomain.freeyourgadget.gadgetfit.entities.DeviceAttributesDao;
 import nodomain.freeyourgadget.gadgetfit.entities.DeviceDao;
-import nodomain.freeyourgadget.gadgetfit.entities.PebbleAppstoreIdEntry;
-import nodomain.freeyourgadget.gadgetfit.entities.PebbleAppstoreIdEntryDao;
 import nodomain.freeyourgadget.gadgetfit.entities.Reminder;
 import nodomain.freeyourgadget.gadgetfit.entities.ReminderDao;
 import nodomain.freeyourgadget.gadgetfit.entities.Tag;
@@ -725,19 +723,6 @@ public class DBHelper {
         return Collections.emptyList();
     }
 
-    public static PebbleAppstoreIdEntry getPebbleAppstoreIdByUUID(@NonNull String appUUID) {
-        try (DBHandler db = GBApplication.acquireDB()) {
-            final DaoSession daoSession = db.getDaoSession();
-            final PebbleAppstoreIdEntryDao entryDao = daoSession.getPebbleAppstoreIdEntryDao();
-            final QueryBuilder<PebbleAppstoreIdEntry> qb = entryDao.queryBuilder();
-            qb.where(PebbleAppstoreIdEntryDao.Properties.Uuid.eq(appUUID));
-            return qb.build().unique();
-        } catch (final Exception e) {
-            LOG.error("Error reading appstoreId from db", e);
-        }
-
-        return null;
-    }
 
     public static void store(final Reminder reminder) {
         try (DBHandler db = GBApplication.acquireDB()) {
@@ -766,14 +751,7 @@ public class DBHelper {
         }
     }
 
-    public static void store(final PebbleAppstoreIdEntry entry) {
-        try (DBHandler db = GBApplication.acquireDB()) {
-            final DaoSession daoSession = db.getDaoSession();
-            daoSession.insertOrReplace(entry);
-        } catch (final Exception e) {
-            LOG.error("Error acquiring database", e);
-        }
-    }
+
 
     public static void delete(final Reminder reminder) {
         try (DBHandler db = GBApplication.acquireDB()) {

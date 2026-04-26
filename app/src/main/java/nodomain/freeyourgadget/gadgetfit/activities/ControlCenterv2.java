@@ -262,7 +262,9 @@ public class ControlCenterv2 extends AppCompatActivity
                 final boolean anyConnected = devices1.stream().anyMatch(GBDevice::isInitialized);
                 if (!anyConnected) {
                     // No devices are connected at all
-                    GB.toast(getString(R.string.info_no_devices_connected), Toast.LENGTH_LONG, GB.WARN);
+                    //= GB.toast(getString(R.string.info_no_devices_connected), Toast.LENGTH_LONG, GB.WARN);// runtime exception happens
+                    Toast.makeText(this, getString(R.string.info_no_devices_connected), Toast.LENGTH_LONG).show();
+
                     swipeLayout.setRefreshing(false);
                     return;
                 }

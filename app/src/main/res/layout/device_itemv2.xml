@@ -62,7 +62,7 @@
                     android:tooltipText="@string/candidate_item_device_image"
                     android:focusable="true"
                     android:longClickable="true"
-                    card_view:srcCompat="@drawable/ic_device_pebble" />
+                 />
 
                 <TextView
                     android:id="@+id/device_name"

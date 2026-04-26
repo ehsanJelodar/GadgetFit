@@ -18,20 +18,7 @@ class InternetFirewall(
         val prefs = GBApplication.getPrefs()
 
         when (requestType) {
-            InternetRequestType.PEBBLE_APP_STORE -> return prefs.getBoolean(
-                "pref_key_internethelper_allow_pebble_appstore",
-                false
-            )
 
-            InternetRequestType.PEBBLE_APP_CONFIG -> return prefs.getBoolean(
-                "pref_key_internethelper_allow_pebble_configs",
-                false
-            )
-
-            InternetRequestType.PEBBLE_BACKGROUND_JS -> return prefs.getBoolean(
-                "pref_key_internethelper_allow_pebble_background_js",
-                false
-            )
 
             InternetRequestType.BANGLE_APP_LOADER -> {
                 if (GBApplication.hasDirectInternetAccess()) {

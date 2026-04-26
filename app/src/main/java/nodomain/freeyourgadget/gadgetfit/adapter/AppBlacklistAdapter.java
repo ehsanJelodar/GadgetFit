@@ -46,7 +46,6 @@ import nodomain.freeyourgadget.gadgetfit.activities.NotificationFilterActivity;
 import nodomain.freeyourgadget.gadgetfit.util.GB;
 import nodomain.freeyourgadget.gadgetfit.util.NotificationUtils;
 
-import static nodomain.freeyourgadget.gadgetfit.GBApplication.packageNameToPebbleMsgSender;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,7 +75,7 @@ public class AppBlacklistAdapter extends RecyclerView.Adapter<AppBlacklistAdapte
             if (name == null) {
                 name = packageName;
             }
-            if (GBApplication.appIsNotifBlacklisted(packageName) || GBApplication.appIsPebbleBlacklisted(packageNameToPebbleMsgSender(packageName))) {
+            if (GBApplication.appIsNotifBlacklisted(packageName)) {
                 // sort blacklisted first by prefixing with a '!'
                 name = "!" + name;
             }
@@ -107,17 +106,8 @@ public class AppBlacklistAdapter extends RecyclerView.Adapter<AppBlacklistAdapte
         holder.deviceImageView.setImageDrawable(NotificationUtils.getAppIcon(mContext, packageName));
 
         holder.blacklist_checkbox.setChecked(GBApplication.appIsNotifBlacklisted(packageName));
-        holder.blacklist_pebble_checkbox.setChecked(GBApplication.appIsPebbleBlacklisted(packageNameToPebbleMsgSender(packageName)));
 
-        holder.blacklist_pebble_checkbox.setOnClickListener(view -> {
-            ((CheckedTextView) view).toggle();
-            if (((CheckedTextView) view).isChecked()) {
-                GBApplication.addAppToPebbleBlacklist(packageName);
-            } else {
-                GBApplication.removeFromAppsPebbleBlacklist(packageName);
-            }
 
-        });
         holder.itemView.setOnClickListener(v -> {
             CheckedTextView checkBox = (v.findViewById(R.id.item_checkbox));
             checkBox.toggle();
@@ -178,7 +168,6 @@ public class AppBlacklistAdapter extends RecyclerView.Adapter<AppBlacklistAdapte
     public static class AppBLViewHolder extends RecyclerView.ViewHolder {
 
         final CheckedTextView blacklist_checkbox;
-        final CheckedTextView blacklist_pebble_checkbox;
         final ImageView deviceImageView;
         final TextView deviceAppVersionAuthorLabel;
         final TextView deviceAppNameLabel;
@@ -188,7 +177,6 @@ public class AppBlacklistAdapter extends RecyclerView.Adapter<AppBlacklistAdapte
             super(itemView);
 
             blacklist_checkbox = itemView.findViewById(R.id.item_checkbox);
-            blacklist_pebble_checkbox = itemView.findViewById(R.id.item_pebble_checkbox);
             deviceImageView = itemView.findViewById(R.id.item_image);
             deviceAppVersionAuthorLabel = itemView.findViewById(R.id.item_details);
             deviceAppNameLabel = itemView.findViewById(R.id.item_name);

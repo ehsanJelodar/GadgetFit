@@ -1838,7 +1838,7 @@ public abstract class HuamiSupport extends AbstractBTLESingleDeviceSupport
     private boolean workoutNeedsGps = false;
 
     /**
-     * Track the {@link nodomain.freeyourgadget.gadgetbridge.model.ActivityKind} that was opened, for the same reasons as {@code workoutNeedsGps}.
+     * Track the {@link nodomain.freeyourgadget.gadgetfit.model.ActivityKind} that was opened, for the same reasons as {@code workoutNeedsGps}.
      */
     private ActivityKind workoutActivityKind = ActivityKind.UNKNOWN;
 
@@ -2065,6 +2065,11 @@ public abstract class HuamiSupport extends AbstractBTLESingleDeviceSupport
         final UUID characteristicUUID = characteristic.getUuid();
         if (HuamiService.UUID_CHARACTERISTIC_6_BATTERY_INFO.equals(characteristicUUID)) {
             handleBatteryInfo(value, BluetoothGatt.GATT_SUCCESS);
+            if(characteristic.getValue()[0]==1 && characteristic.getValue()[1]==43 && characteristic.getValue()[2]==0)// [1, 43, 0] esd add
+            {
+                //esd add to detect when resource update.
+                LOG.info("Resource or FW updated.");
+            }
             return true;
         } else if (MiBandService.UUID_CHARACTERISTIC_REALTIME_STEPS.equals(characteristicUUID)) {
             handleRealtimeSteps(value);
@@ -2075,6 +2080,19 @@ public abstract class HuamiSupport extends AbstractBTLESingleDeviceSupport
         } else if (HuamiService.UUID_CHARACTERISTIC_AUTH.equals(characteristicUUID)) {
             LOG.info("AUTHENTICATION?? " + characteristicUUID);
             logMessageContent(value);
+
+            if(value.length == 3 && value[0]== 16 && value[1] == -125 &&  value[2] == 8) //esd add // [16, -125, 8]// when auth code is wrong.
+            {
+               //= byte[] b = new byte[1];
+               //= b[0] = MiBandService.NOTIFY_AUTHENTICATION_FAILED;
+               //= handleNotificationNotif(b);
+
+                // we get first FAILED, then NOTIFY_STATUS_MOTOR_AUTH (0x13)
+                // which means, we need to authenticate by tapping
+                getDevice().setState(GBDevice.State.AUTHENTICATION_REQUIRED);
+                getDevice().sendDeviceUpdateIntent(getContext());
+                LOG.info("Band needs pairing...");
+            }
             return true;
         } else if (HuamiService.UUID_CHARACTERISTIC_DEVICEEVENT.equals(characteristicUUID)) {
             handleDeviceEvent(value);

@@ -121,10 +121,6 @@ public class GBDaoGenerator {
         addCmfSleepStageSample(schema, user, device);
         addCmfHeartRateSample(schema, user, device);
         addCmfWorkoutGpsSample(schema, user, device);
-        addPebbleHealthActivitySample(schema, user, device);
-        addPebbleHealthActivityKindOverlay(schema, user, device);
-        addPebbleMisfitActivitySample(schema, user, device);
-        addPebbleMorpheuzActivitySample(schema, user, device);
         addHPlusHealthActivityKindOverlay(schema, user, device);
         addHPlusHealthActivitySample(schema, user, device);
         addNo1F1ActivitySample(schema, user, device);
@@ -228,7 +224,6 @@ public class GBDaoGenerator {
         addAppSpecificNotificationSettings(schema, device);
         addCyclingSample(schema, user, device);
         addAudioRecordings(schema, device);
-        addPebbleAppstoreIdEntry(schema);
 
         Entity notificationFilter = addNotificationFilters(schema);
 
@@ -777,46 +772,6 @@ public class GBDaoGenerator {
     private static void addBloodPressureProperies(Entity activitySample) {
         activitySample.addIntProperty(SAMPLE_BLOOD_PRESSURE_SYSTOLIC).notNull();
         activitySample.addIntProperty(SAMPLE_BLOOD_PRESSURE_DIASTOLIC).notNull();
-    }
-
-    private static Entity addPebbleHealthActivitySample(Schema schema, Entity user, Entity device) {
-        Entity activitySample = addEntity(schema, "PebbleHealthActivitySample");
-        addCommonActivitySampleProperties("AbstractPebbleHealthActivitySample", activitySample, user, device);
-        activitySample.addByteArrayProperty("rawPebbleHealthData").codeBeforeGetter(OVERRIDE);
-        activitySample.addIntProperty(SAMPLE_RAW_INTENSITY).notNull().codeBeforeGetterAndSetter(OVERRIDE);
-        activitySample.addIntProperty(SAMPLE_STEPS).notNull().codeBeforeGetterAndSetter(OVERRIDE);
-        addHeartRateProperties(activitySample);
-        return activitySample;
-    }
-
-    private static Entity addPebbleHealthActivityKindOverlay(Schema schema, Entity user, Entity device) {
-        Entity activityOverlay = addEntity(schema, "PebbleHealthActivityOverlay");
-
-        activityOverlay.addIntProperty(TIMESTAMP_FROM).notNull().primaryKey();
-        activityOverlay.addIntProperty(TIMESTAMP_TO).notNull().primaryKey();
-        activityOverlay.addIntProperty(SAMPLE_RAW_KIND).notNull().primaryKey();
-        Property deviceId = activityOverlay.addLongProperty("deviceId").primaryKey().notNull().getProperty();
-        activityOverlay.addToOne(device, deviceId);
-
-        Property userId = activityOverlay.addLongProperty("userId").notNull().getProperty();
-        activityOverlay.addToOne(user, userId);
-        activityOverlay.addByteArrayProperty("rawPebbleHealthData");
-
-        return activityOverlay;
-    }
-
-    private static Entity addPebbleMisfitActivitySample(Schema schema, Entity user, Entity device) {
-        Entity activitySample = addEntity(schema, "PebbleMisfitSample");
-        addCommonActivitySampleProperties("AbstractPebbleMisfitActivitySample", activitySample, user, device);
-        activitySample.addIntProperty("rawPebbleMisfitSample").notNull().codeBeforeGetter(OVERRIDE);
-        return activitySample;
-    }
-
-    private static Entity addPebbleMorpheuzActivitySample(Schema schema, Entity user, Entity device) {
-        Entity activitySample = addEntity(schema, "PebbleMorpheuzSample");
-        addCommonActivitySampleProperties("AbstractPebbleMorpheuzActivitySample", activitySample, user, device);
-        activitySample.addIntProperty(SAMPLE_RAW_INTENSITY).notNull().codeBeforeGetterAndSetter(OVERRIDE);
-        return activitySample;
     }
 
     private static Entity addHPlusHealthActivitySample(Schema schema, Entity user, Entity device) {
@@ -1514,19 +1469,6 @@ public class GBDaoGenerator {
         Property notificationFilterMode = notificatonFilter.addIntProperty("notificationFilterMode").notNull().getProperty();
         Property notificationFilterSubMode = notificatonFilter.addIntProperty("notificationFilterSubMode").notNull().getProperty();
         return notificatonFilter;
-    }
-
-    private static void addPebbleAppstoreIdEntry(Schema schema) {
-        Entity pebbleAppstoreIdEntry = addEntity(schema, "PebbleAppstoreIdEntry");
-        Property uuidProperty = pebbleAppstoreIdEntry.addStringProperty("uuid").notNull().getProperty();
-        pebbleAppstoreIdEntry.addStringProperty("appstoreId").notNull();
-        pebbleAppstoreIdEntry.addLongProperty("lastUpdateCheck").notNull();
-        pebbleAppstoreIdEntry.addBooleanProperty("updateAvailable").notNull();
-
-        Index indexUnique = new Index();
-        indexUnique.addProperty(uuidProperty);
-        indexUnique.makeUnique();
-        pebbleAppstoreIdEntry.addIndex(indexUnique);
     }
 
     private static void addActivitySummary(Schema schema, Entity user, Entity device) {

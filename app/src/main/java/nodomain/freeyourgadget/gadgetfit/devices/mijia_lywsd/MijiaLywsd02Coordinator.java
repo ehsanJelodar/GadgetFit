@@ -33,7 +33,7 @@ public class MijiaLywsd02Coordinator extends AbstractMijiaLywsdCoordinator {
 
     @Override
     public int getDefaultIconResource() {
-        return R.drawable.ic_device_pebble;
+        return R.drawable.ic_device_miscale;
     }
 
     @Override

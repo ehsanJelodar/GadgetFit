@@ -20,6 +20,7 @@ package nodomain.freeyourgadget.gadgetfit.devices.miband;
 
 import static nodomain.freeyourgadget.gadgetfit.util.BondingUtil.STATE_DEVICE_CANDIDATE;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -27,10 +28,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -180,7 +183,20 @@ public class MiBandPairingActivity extends AbstractGBActivity implements Bonding
             // devices, as bonded devices are displayed anyway.
             String macAddress = deviceCandidate.getMacAddress();
             BluetoothDevice device = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(macAddress);
-            if (device != null && device.getBondState() == BluetoothDevice.BOND_NONE) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                Toast.makeText(this,"Bluetooth permission not granted", Toast.LENGTH_SHORT).show();//esd add
+                return;
+            }
+            LOG.debug("paired_MACC: "+ macAddress);
+           //= if (device != null && device.getBondState() == BluetoothDevice.BOND_NONE) { //esd maybe needs remove check for bound_none, and just check (device != null)
+            if (device != null) { //esd maybe needs remove check for bound_none, and just check (device != null)
                 // Persist the device directly to the database
                 try (DBHandler db = GBApplication.acquireDB()) {
                     final DaoSession daoSession = db.getDaoSession();

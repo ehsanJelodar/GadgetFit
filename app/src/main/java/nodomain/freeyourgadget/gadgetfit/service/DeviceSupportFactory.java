@@ -39,7 +39,6 @@ import nodomain.freeyourgadget.gadgetfit.GBException;
 import nodomain.freeyourgadget.gadgetfit.R;
 import nodomain.freeyourgadget.gadgetfit.devices.DeviceCoordinator;
 import nodomain.freeyourgadget.gadgetfit.impl.GBDevice;
-import nodomain.freeyourgadget.gadgetfit.service.devices.pebble.PebbleSupport;
 import nodomain.freeyourgadget.gadgetfit.util.preferences.DevicePrefs;
 
 import java.lang.reflect.Constructor;
@@ -62,12 +61,12 @@ public class DeviceSupportFactory {
         String deviceAddress = device.getAddress();
         int indexFirstColon = deviceAddress.indexOf(":");
         if (indexFirstColon > 0) {
-            if (indexFirstColon == deviceAddress.lastIndexOf(":")) { // only one colon
-                deviceSupport = createTCPDeviceSupport(device);
-            } else {
+           //== if (indexFirstColon == deviceAddress.lastIndexOf(":")) { // only one colon
+               //== deviceSupport = createTCPDeviceSupport(device);
+         //==   } else {
                 // multiple colons -- bt?
                 deviceSupport = createBTDeviceSupport(device);
-            }
+          //==  }
         } else {
             // no colon at all, maybe a class name?
             deviceSupport = createClassNameDeviceSupport(device);
@@ -135,13 +134,4 @@ public class DeviceSupportFactory {
         }
     }
 
-    private DeviceSupport createTCPDeviceSupport(GBDevice gbDevice) throws GBException {
-        try {
-            DeviceSupport deviceSupport = new ServiceDeviceSupport(new PebbleSupport(), EnumSet.of(ServiceDeviceSupport.Flags.BUSY_CHECKING));
-            deviceSupport.setContext(gbDevice, mBtAdapter, mContext);
-            return deviceSupport;
-        } catch (Exception e) {
-            throw new GBException("cannot connect to " + gbDevice, e); // FIXME: localize
-        }
-    }
 }

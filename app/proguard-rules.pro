@@ -15,9 +15,7 @@
 -keepclassmembers class * {
     @android.webkit.JavascriptInterface <methods>;
 }
--keepclassmembers class nodomain.freeyourgadget.gadgetfit.service.devices.pebble.webview.JSInterface {
-    public *;
-}
+
 # Required for reflection in BangleJSDeviceSupport
 -keepclassmembers class nodomain.freeyourgadget.gadgetfit.model.CallSpec {
     public static *;

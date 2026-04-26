@@ -3,10 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <!--
-        Comment in for testing Pebble Emulator
-        <uses-permission android:name="android.permission.INTERNET" />
-    -->
+
     <!-- Used for Bluetooth access -->
     <!--
         Request legacy Bluetooth permissions on older devices.
@@ -312,10 +309,6 @@
             android:name=".activities.appmanager.config.DynamicAppConfigActivity"
             android:label="@string/app_configure"
             android:launchMode="singleTop"
-            android:parentActivityName=".activities.appmanager.AppManagerActivity" />
-        <activity
-            android:name=".activities.appmanager.RebbleAppStoreActivity"
-            android:label="@string/activity_title_rebble_app_store"
             android:parentActivityName=".activities.appmanager.AppManagerActivity" />
         <activity
             android:name=".activities.musicmanager.MusicManagerActivity"
@@ -650,12 +643,6 @@
             </intent-filter>
         </service>
 
-        <service
-            android:name=".service.devices.pebble.webview.PebbleJsService"
-            android:exported="false"
-            android:stopWithTask="false"
-            android:foregroundServiceType="connectedDevice" />
-
         <receiver
             android:name=".externalevents.GenericWeatherReceiver"
             android:enabled="true"
@@ -789,9 +776,6 @@
             android:name=".devices.miband.MiBandPairingActivity"
             android:label="@string/title_activity_mi_band_pairing" />
         <activity
-            android:name=".devices.pebble.PebblePairingActivity"
-            android:label="@string/title_activity_pebble_pairing" />
-        <activity
             android:name=".devices.evenrealities.G1PairingActivity"
             android:label="@string/title_activity_even_realities_g1_pairing"
             android:parentActivityName=".activities.discovery.DiscoveryActivityV2" />
@@ -880,12 +864,7 @@
         <activity
             android:name=".activities.FindPhoneActivity"
             android:label="Find Phone" />
-<!--
-        <provider
-            android:name=".contentprovider.PebbleContentProvider"
-            android:authorities="@string/pebble_content_provider"
-            android:exported="true" />
--->
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.screenshot_provider"
@@ -945,24 +924,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activities.ExternalPebbleJSActivity"
-            android:label="@string/app_configure"
-            android:parentActivityName=".activities.appmanager.AppManagerActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="nodomain.freeyourgadget.gadgetfit.activities.ControlCenterv2" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="gadgetfit" />
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".devices.qhybrid.QHybridConfigActivity"

@@ -35,9 +35,6 @@ import nodomain.freeyourgadget.gadgetfit.model.ActivityKind;
  */
 public interface SampleProvider<T extends AbstractActivitySample> {
     // These are only used for SharedPreferences
-    int PROVIDER_PEBBLE_MORPHEUZ = 1;
-    int PROVIDER_PEBBLE_MISFIT = 3;
-    int PROVIDER_PEBBLE_HEALTH = 4;
 
     ActivityKind normalizeType(int rawType);
 

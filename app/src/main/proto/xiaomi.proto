@@ -318,8 +318,7 @@ message DndSync {
 
 message WearingMode {
   // 0 Band Mode (wristband)
-  // 1 Pebble Mode (show buckle)
-  // 2 Necklace mode (neck strap)
+  // 1 Necklace mode (neck strap)
   optional uint32 mode = 1;
 }
 

@@ -348,7 +348,6 @@ import nodomain.freeyourgadget.gadgetfit.devices.oppo.OppoEncoAir2Coordinator;
 import nodomain.freeyourgadget.gadgetfit.devices.oppo.OppoEncoAirCoordinator;
 import nodomain.freeyourgadget.gadgetfit.devices.oppo.OppoEncoBuds2Coordinator;
 import nodomain.freeyourgadget.gadgetfit.devices.overmax.OVTouch26Coordinator;
-import nodomain.freeyourgadget.gadgetfit.devices.pebble.PebbleCoordinator;
 import nodomain.freeyourgadget.gadgetfit.devices.pinetime.PineTimeJFCoordinator;
 import nodomain.freeyourgadget.gadgetfit.devices.pixel.PixelBudsACoordinator;
 import nodomain.freeyourgadget.gadgetfit.devices.polar.PolarH10DeviceCoordinator;
@@ -466,7 +465,6 @@ import nodomain.freeyourgadget.gadgetfit.service.devices.gatt_client.BleGattClie
  */
 public enum DeviceType {
     UNKNOWN(UnknownDeviceCoordinator.class),
-    PEBBLE(PebbleCoordinator.class),
     MIBAND(MiBandCoordinator.class),
     MIBAND2(MiBand2Coordinator.class),
     MIBAND2_HRX(MiBand2HRXCoordinator.class),

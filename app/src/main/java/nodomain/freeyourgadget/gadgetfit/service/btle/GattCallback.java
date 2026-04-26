@@ -88,11 +88,11 @@ public interface GattCallback {
     void onReliableWriteCompleted (BluetoothGatt gatt, int status);
 
     ///  @see BluetoothGattCallback#onPhyRead(BluetoothGatt, int, int, int)
-    @RequiresApi(Build.VERSION_CODES.O)
+    
     void onPhyRead(BluetoothGatt gatt, int txPhy, int rxPhy, int status);
 
     ///  @see BluetoothGattCallback#onPhyUpdate(BluetoothGatt, int, int, int)
-    @RequiresApi(Build.VERSION_CODES.O)
+    
     void onPhyUpdate(BluetoothGatt gatt, int txPhy, int rxPhy, int status);
 
     ///  @see BluetoothGattCallback#onServiceChanged(BluetoothGatt)

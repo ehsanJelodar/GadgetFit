@@ -41,7 +41,6 @@ import nodomain.freeyourgadget.gadgetfit.activities.app_specific_notifications.A
 import nodomain.freeyourgadget.gadgetfit.impl.GBDevice;
 import nodomain.freeyourgadget.gadgetfit.util.NotificationUtils;
 
-import static nodomain.freeyourgadget.gadgetfit.GBApplication.packageNameToPebbleMsgSender;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,7 +127,7 @@ public class AppSpecificNotificationSettingsAppListAdapter extends RecyclerView.
         final List<String> ret = new LinkedList<>();
 
         for(String packageName: apps) {
-            boolean blacklisted = GBApplication.appIsNotifBlacklisted(packageName) || GBApplication.appIsPebbleBlacklisted(packageNameToPebbleMsgSender(packageName));
+            boolean blacklisted = GBApplication.appIsNotifBlacklisted(packageName);
             if((!filterInverted && !blacklisted) || (filterInverted && blacklisted)) {
                 ret.add(packageName);
             }

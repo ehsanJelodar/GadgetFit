@@ -91,7 +91,6 @@ import nodomain.freeyourgadget.gadgetfit.externalevents.MusicPlaybackReceiver;
 import nodomain.freeyourgadget.gadgetfit.externalevents.NewDataReceiver;
 import nodomain.freeyourgadget.gadgetfit.externalevents.OmniJawsObserver;
 import nodomain.freeyourgadget.gadgetfit.externalevents.OsmandEventReceiver;
-import nodomain.freeyourgadget.gadgetfit.externalevents.PebbleReceiver;
 import nodomain.freeyourgadget.gadgetfit.externalevents.PhoneCallReceiver;
 import nodomain.freeyourgadget.gadgetfit.externalevents.SMSReceiver;
 import nodomain.freeyourgadget.gadgetfit.externalevents.SilentModeReceiver;
@@ -259,7 +258,6 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
 
     private PhoneCallReceiver mPhoneCallReceiver = null;
     private SMSReceiver mSMSReceiver = null;
-    private PebbleReceiver mPebbleReceiver = null;
     private MusicPlaybackReceiver mMusicPlaybackReceiver = null;
     private TimeChangeReceiver mTimeChangeReceiver = null;
     private BluetoothConnectReceiver mBlueToothConnectReceiver = null;
@@ -567,7 +565,6 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
             getPrefs().getPreferences().registerOnSharedPreferenceChangeListener(this);
             allowBluetoothIntentApi = getPrefs().getBoolean(GBPrefs.PREF_ALLOW_INTENT_API, false);
             reconnectViaScan = getPrefs().getAutoReconnectByScan();
-            //=LOG.debug("tesssst {}", reconnectViaScan);
         }
 
         startForeground();
@@ -1416,10 +1413,7 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
                 mSMSReceiver = new SMSReceiver();
                 ContextCompat.registerReceiver(this, mSMSReceiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"), ContextCompat.RECEIVER_EXPORTED);
             }
-            if (mPebbleReceiver == null) {
-                mPebbleReceiver = new PebbleReceiver();
-                ContextCompat.registerReceiver(this, mPebbleReceiver, new IntentFilter("com.getpebble.action.SEND_NOTIFICATION"), ContextCompat.RECEIVER_EXPORTED);
-            }
+
             if (mMusicPlaybackReceiver == null && features.supportsMusicInfo()) {
                 mMusicPlaybackReceiver = new MusicPlaybackReceiver();
                 IntentFilter filter = new IntentFilter();
@@ -1525,10 +1519,7 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
                 unregisterReceiver(mSMSReceiver);
                 mSMSReceiver = null;
             }
-            if (mPebbleReceiver != null) {
-                unregisterReceiver(mPebbleReceiver);
-                mPebbleReceiver = null;
-            }
+
             if (mMusicPlaybackReceiver != null) {
                 unregisterReceiver(mMusicPlaybackReceiver);
                 mMusicPlaybackReceiver = null;

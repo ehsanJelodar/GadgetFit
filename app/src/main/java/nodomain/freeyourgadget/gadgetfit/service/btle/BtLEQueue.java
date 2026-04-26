@@ -902,7 +902,7 @@ public final class BtLEQueue implements Thread.UncaughtExceptionHandler {
         }
 
         @Override
-        @RequiresApi(Build.VERSION_CODES.O)
+        
         public void onPhyRead(BluetoothGatt gatt, int txPhy, int rxPhy, int status) {
             LOG.debug("phy read: tx={} rx={} {}", txPhy, rxPhy,
                     BleNamesResolver.getStatusString(status));
@@ -927,7 +927,7 @@ public final class BtLEQueue implements Thread.UncaughtExceptionHandler {
         }
 
         @Override
-        @RequiresApi(Build.VERSION_CODES.O)
+        
         public void onPhyUpdate(BluetoothGatt gatt, int txPhy, int rxPhy, int status) {
             LOG.debug("phy updated: tx={} rx={} {}", txPhy, rxPhy,
                     BleNamesResolver.getStatusString(status));

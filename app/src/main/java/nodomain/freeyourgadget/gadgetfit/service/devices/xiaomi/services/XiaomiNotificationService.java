@@ -30,7 +30,6 @@ import java.util.Locale;
 import java.util.Queue;
 
 import nodomain.freeyourgadget.gadgetfit.BuildConfig;
-import nodomain.freeyourgadget.gadgetfit.R;
 import nodomain.freeyourgadget.gadgetfit.activities.devicesettings.DeviceSettingsPreferenceConst;
 import nodomain.freeyourgadget.gadgetfit.deviceevents.GBDeviceEventCallControl;
 import nodomain.freeyourgadget.gadgetfit.deviceevents.GBDeviceEventNotificationControl;

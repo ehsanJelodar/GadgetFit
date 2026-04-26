@@ -36,13 +36,7 @@
             android:title="@string/internet_helper_pref_pebble_background_js_title"
             android:summary="@string/internet_helper_pref_pebble_background_js_summary"
             app:iconSpaceReserved="false" />
-        <SwitchPreferenceCompat
-            android:defaultValue="false"
-            android:key="pref_key_internethelper_allow_pebble_configs"
-            android:layout="@layout/preference_checkbox"
-            android:title="@string/internet_helper_pref_pebble_app_config_title"
-            android:summary="@string/internet_helper_pref_pebble_app_config_summary"
-            app:iconSpaceReserved="false" />
+
         <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="pref_key_internethelper_allow_bangle_app_loader"

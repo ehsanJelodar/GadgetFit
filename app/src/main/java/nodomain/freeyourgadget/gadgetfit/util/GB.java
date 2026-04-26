@@ -81,7 +81,6 @@ public class GB {
     public static final String NOTIFICATION_CHANNEL_ID_LOW_BATTERY = "low_battery";
     public static final String NOTIFICATION_CHANNEL_ID_FULL_BATTERY = "full_battery";
     public static final String NOTIFICATION_CHANNEL_ID_GPS = "gps";
-    public static final String NOTIFICATION_CHANNEL_ID_PEBBLE_JS = "pebble_js";
     public static final String NOTIFICATION_CHANNEL_ID_HEALTH_CONNECT_SYNC = "gadgetfit_health_connect_sync";
 
     public static final int NOTIFICATION_ID = 1;
@@ -93,7 +92,6 @@ public class GB {
     public static final int NOTIFICATION_ID_GPS = 7;
     public static final int NOTIFICATION_ID_SCAN = 8;
     public static final int NOTIFICATION_ID_FULL_BATTERY = 9;
-    public static final int NOTIFICATION_ID_PEBBLE_JS = 10;
     public static final int NOTIFICATION_ID_ERROR = 42;
 
     private static final Logger LOG = LoggerFactory.getLogger(GB.class);
@@ -175,12 +173,6 @@ public class GB {
                     context.getString(R.string.notification_channel_gps),
                     NotificationManager.IMPORTANCE_MIN);
             notificationManager.createNotificationChannel(channelGps);
-
-            NotificationChannel channelPebbleJs = new NotificationChannel(
-                    NOTIFICATION_CHANNEL_ID_PEBBLE_JS,
-                    context.getString(R.string.notification_channel_pebble_js_runner),
-                    NotificationManager.IMPORTANCE_MIN);
-            notificationManager.createNotificationChannel(channelPebbleJs);
 
             NotificationChannel channelHealthConnectSync = new NotificationChannel(
                     NOTIFICATION_CHANNEL_ID_HEALTH_CONNECT_SYNC,

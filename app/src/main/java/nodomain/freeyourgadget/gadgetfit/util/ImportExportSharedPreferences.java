@@ -128,9 +128,6 @@ public class ImportExportSharedPreferences {
                             case GBPrefs.PACKAGE_BLACKLIST:
                                 GBApplication.setAppsNotifBlackList(stringToSet(text), editor);
                                 break;
-                            case GBPrefs.PACKAGE_PEBBLEMSG_BLACKLIST:
-                                GBApplication.setAppsPebbleBlackList(stringToSet(text), editor);
-                                break;
                             // @array/device_action_values
                             case DeviceSettingsPreferenceConst.PREF_DEVICE_ACTION_FELL_SLEEP_SELECTIONS:
                             case DeviceSettingsPreferenceConst.PREF_DEVICE_ACTION_START_NON_WEAR_SELECTIONS:

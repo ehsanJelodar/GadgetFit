@@ -64,10 +64,6 @@ class MainDebugFragment : AbstractDebugFragment() {
             }
         }
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            findPreference<Preference>(PREF_DEBUG_COMPANION_DEVICES)?.isVisible = false
-        }
-
         onClick(PREF_DEBUG_ACTIVITY_CAMERA) {
             val intent = Intent(requireContext().applicationContext, CameraActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK

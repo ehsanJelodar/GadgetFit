@@ -137,7 +137,7 @@ public class DiscoveryActivityV2 extends AbstractGBActivity implements AdapterVi
     // Array to back the adapter for the UI
     private final ArrayList<GBDeviceCandidate> deviceCandidates = new ArrayList<>();
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

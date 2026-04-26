@@ -212,12 +212,6 @@ public class GBWebClient extends WebViewClient {
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 GBApplication.getContext().startActivity(i);
             }
-        } else if (parsedUri.getScheme().startsWith("gadgetfit")) {
-            url = url.replaceFirst("^gadgetfit://.*json=", "file:///android_asset/app_config/configure.html?config=true&json=");
-            view.loadUrl(url);
-        } else if (parsedUri.getScheme().startsWith("pebblejs")) {
-            url = url.replaceFirst("^pebblejs://close#", "file:///android_asset/app_config/configure.html?config=true&json=");
-            view.loadUrl(url);
         } else if (parsedUri.getScheme().equals("data")) { //clay
             view.loadUrl(url);
         } else {

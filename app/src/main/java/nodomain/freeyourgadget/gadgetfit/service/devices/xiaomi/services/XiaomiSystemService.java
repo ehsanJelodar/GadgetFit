@@ -450,9 +450,6 @@ public class XiaomiSystemService extends AbstractXiaomiService implements Xiaomi
                     wearMode = "band";
                     break;
                 case 1:
-                    wearMode = "pebble";
-                    break;
-                case 2:
                     wearMode = "necklace";
                     break;
                 default:
@@ -477,10 +474,8 @@ public class XiaomiSystemService extends AbstractXiaomiService implements Xiaomi
 
         if ("band".equals(wearMode)) {
             wearModeInt = 0;
-        } else if ("pebble".equals(wearMode)) {
-            wearModeInt = 1;
         } else if ("necklace".equals(wearMode)) {
-            wearModeInt = 2;
+            wearModeInt = 1;
         } else {
             LOG.warn("Unknown wear mode {}", wearMode);
             return;
