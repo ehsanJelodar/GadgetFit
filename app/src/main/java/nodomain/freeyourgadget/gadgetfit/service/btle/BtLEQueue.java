@@ -479,8 +479,8 @@ public final class BtLEQueue implements Thread.UncaughtExceptionHandler {
                 // don't reconnect immediately to give the Bluetooth stack some time to settle down
                 // use BluetoothConnectReceiver or AutoConnectIntervalReceiver instead
                 if (mDeviceSupport.getScanReconnect()) {
-                    LOG.info("waiting for BLE scan before attempting reconnection");
-                    setDeviceConnectionState(State.WAITING_FOR_SCAN);
+                    LOG.info("scan reconnect requested, falling back to delayed BLE reconnection");
+                    setDeviceConnectionState(State.WAITING_FOR_RECONNECT);
                 } else {
                     LOG.info("enabling automatic delayed BLE reconnection");
                     setDeviceConnectionState(State.WAITING_FOR_RECONNECT);

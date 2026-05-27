@@ -53,6 +53,7 @@ public class AutoConnectIntervalReceiver extends BroadcastReceiver {
         this.service = service;
         IntentFilter filterLocal = new IntentFilter();
         filterLocal.addAction(DeviceManager.ACTION_DEVICES_CHANGED);
+        filterLocal.addAction(GBDevice.ACTION_DEVICE_CHANGED);
         LocalBroadcastManager.getInstance(service).registerReceiver(this, filterLocal);
     }
 
@@ -65,7 +66,7 @@ public class AutoConnectIntervalReceiver extends BroadcastReceiver {
         }
 
         GBDevice[] devices = service.getGBDevices();
-        if (action.equals(DeviceManager.ACTION_DEVICES_CHANGED)) {
+        if (action.equals(DeviceManager.ACTION_DEVICES_CHANGED) || action.equals(GBDevice.ACTION_DEVICE_CHANGED)) {
             boolean scheduleAutoConnect = false;
             boolean allDevicesInitialized = true;
             for (GBDevice device : devices) {

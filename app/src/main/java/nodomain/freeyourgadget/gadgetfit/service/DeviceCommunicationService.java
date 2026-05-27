@@ -285,8 +285,6 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
 
     private SleepAsAndroidReceiver mSleepAsAndroidReceiver = null;
 
-    private HashMap<String, Long> deviceLastScannedTimestamps = new HashMap<>();
-
     private final String[] mMusicActions = {
             "com.android.music.metachanged",
             "com.android.music.playstatechanged",
@@ -434,59 +432,6 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
                     sendDeviceAPIBroadcast(device.getAddress(), API_LEGACY_ACTION_DEVICE_SCANNED);
                 }
             }
-            /// extra device search
-            /*== else if(BLEScanService.EVENT_DEVICE_FOUND.equals(action)){
-                String deviceAddress = intent.getStringExtra(BLEScanService.EXTRA_DEVICE_ADDRESS);
-
-                GBDevice target = GBApplication
-                        .app()
-                        .getDeviceManager()
-                        .getDeviceByAddress(deviceAddress);
-
-                if(target == null){
-                    LOG.error("onReceive: device not found");
-                    return;
-                }
-
-                if(!target.getDeviceCoordinator().isConnectable()){
-                    int actualRSSI = intent.getIntExtra(BLEScanService.EXTRA_RSSI, 0);
-                    Prefs prefs = new Prefs(
-                            GBApplication.getDeviceSpecificSharedPrefs(target.getAddress())
-                    );
-                    long timeoutSeconds = prefs.getLong("devicesetting_scannable_debounce", 60);
-                    long minimumUnseenSeconds = prefs.getLong("devicesetting_scannable_unseen", 0);
-                    int thresholdRSSI = prefs.getInt("devicesetting_scannable_rssi", -100);
-
-                    if(actualRSSI < thresholdRSSI){
-                        LOG.debug("ignoring {} since RSSI is too low ({} < {})", deviceAddress, actualRSSI, thresholdRSSI);
-                        return;
-                    }
-
-                    Long lastSeenTimestamp = deviceLastScannedTimestamps.get(deviceAddress);
-                    deviceLastScannedTimestamps.put(deviceAddress, System.currentTimeMillis());
-
-                    if(lastSeenTimestamp != null){
-                        long secondsSince = (System.currentTimeMillis() - lastSeenTimestamp) / 1000;
-                        if(secondsSince < minimumUnseenSeconds){
-                            LOG.debug("ignoring {}, since only {} seconds passed (< {})", deviceAddress, secondsSince, minimumUnseenSeconds);
-                            return;
-                        }
-                    }
-
-                    target.setUpdateState(GBDevice.State.SCANNED, DeviceCommunicationService.this);
-                    new Handler().postDelayed(() -> {
-                        if(target.getState() != GBDevice.State.SCANNED){
-                            return;
-                        }
-                        deviceLastScannedTimestamps.put(target.getAddress(), System.currentTimeMillis());
-                        target.setUpdateState(GBDevice.State.WAITING_FOR_SCAN, DeviceCommunicationService.this);
-                    }, timeoutSeconds * 1000);
-                    return;
-                }
-
-                connectToDevice(target, false);
-            }
- */
         }
     };
 
@@ -522,7 +467,6 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
     private void registerInternalReceivers(){
         IntentFilter localFilter = new IntentFilter();
         localFilter.addAction(GBDevice.ACTION_DEVICE_CHANGED);
-     //=   localFilter.addAction(BLEScanService.EVENT_DEVICE_FOUND);
         LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver, localFilter);
 
     }
@@ -568,34 +512,7 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
         }
 
         startForeground();
-        scanAllDevices();
-
-      //=  if(reconnectViaScan) {
-      //=      scanAllDevices();
-           //= Intent scanServiceIntent = new Intent(this, BLEScanService.class);
-           //= startService(scanServiceIntent);
-      //=  }
-       //= else { // esd add for test
-        //=    scanAllDevices();
-       //= }
-    }
-
-    private void scanAllDevices(){
-        List<GBDevice> devices = GBApplication.app().getDeviceManager().getDevices();
-        for(GBDevice device : devices){
-            if(!device.getDeviceCoordinator().getConnectionType().usesBluetoothLE()){
-                continue;
-            }
-            if(device.getState() != GBDevice.State.NOT_CONNECTED){
-                continue;
-            }
-            boolean shouldAutoConnect = getPrefs().getAutoReconnect(device);
-            if(!shouldAutoConnect){
-                continue;
-            }
-            createDeviceStruct(device);
-            device.setUpdateState(GBDevice.State.WAITING_FOR_SCAN, this);
-        }
+        connectToDevice(null, false);
     }
 
     private DeviceSupportFactory getDeviceSupportFactory() {
@@ -611,6 +528,12 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
         registeredStruct.setCoordinator(target.getDeviceCoordinator());
         deviceStructs.add(registeredStruct);
         return registeredStruct;
+    }
+
+    private void addIfMissing(final List<GBDevice> devices, final GBDevice candidate) {
+        if (!devices.contains(candidate)) {
+            devices.add(candidate);
+        }
     }
 
     private void connectToDevice(@Nullable final GBDevice device, final boolean firstTime) {
@@ -632,9 +555,15 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
 
                     if (lastDeviceAddresses != null && !lastDeviceAddresses.isEmpty()) {
                         for (final GBDevice gbDev : gbAllDevs) {
-                            // TODO volatile address
                             if (lastDeviceAddresses.contains(gbDev.getAddress())) {
-                                gbDevs.add(gbDev);
+                                addIfMissing(gbDevs, gbDev);
+                            }
+                        }
+                    } else {
+                        LOG.info("No last connected device addresses found, falling back to auto-reconnect devices");
+                        for (final GBDevice gbDev : gbAllDevs) {
+                            if (prefs.getAutoReconnect(gbDev)) {
+                                addIfMissing(gbDevs, gbDev);
                             }
                         }
                     }
@@ -1641,7 +1570,19 @@ public class DeviceCommunicationService extends Service implements SharedPrefere
         if (GBPrefs.DEVICE_AUTO_RECONNECT.equals(key)) {
             for(DeviceStruct deviceStruct : deviceStructs){
                 boolean autoReconnect = getPrefs().getAutoReconnect(deviceStruct.getDevice());
-                deviceStruct.getDeviceSupport().setAutoReconnect(autoReconnect);
+                final DeviceSupport deviceSupport = deviceStruct.getDeviceSupport();
+                if (deviceSupport != null) {
+                    deviceSupport.setAutoReconnect(autoReconnect);
+                }
+            }
+        }
+        if (GBPrefs.RECONNECT_SCAN_KEY.equals(key)) {
+            reconnectViaScan = sharedPreferences.getBoolean(GBPrefs.RECONNECT_SCAN_KEY, GBPrefs.RECONNECT_SCAN_DEFAULT);
+            for (DeviceStruct deviceStruct : deviceStructs) {
+                final DeviceSupport deviceSupport = deviceStruct.getDeviceSupport();
+                if (deviceSupport != null) {
+                    deviceSupport.setScanReconnect(reconnectViaScan);
+                }
             }
         }
         if (GBPrefs.CHART_MAX_HEART_RATE.equals(key) || GBPrefs.CHART_MIN_HEART_RATE.equals(key)) {

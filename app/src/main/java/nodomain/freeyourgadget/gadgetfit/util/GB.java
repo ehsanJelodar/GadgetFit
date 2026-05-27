@@ -63,7 +63,9 @@ import nodomain.freeyourgadget.gadgetfit.R;
 import nodomain.freeyourgadget.gadgetfit.activities.ControlCenterv2;
 import nodomain.freeyourgadget.gadgetfit.activities.SettingsActivity;
 import nodomain.freeyourgadget.gadgetfit.deviceevents.GBDeviceEventScreenshot;
+import nodomain.freeyourgadget.gadgetfit.devices.DeviceManager;
 import nodomain.freeyourgadget.gadgetfit.impl.GBDevice;
+import nodomain.freeyourgadget.gadgetfit.model.BatteryState;
 import nodomain.freeyourgadget.gadgetfit.model.DeviceService;
 import nodomain.freeyourgadget.gadgetfit.model.RecordedDataTypes;
 import nodomain.freeyourgadget.gadgetfit.service.DeviceCommunicationService;
@@ -210,11 +212,8 @@ public class GB {
         } else if(devices.size() == 1) {
             GBDevice device = devices.get(0);
             String deviceName = device.getAliasOrName();
-            //= String text = device.getStateString(context);
-           //=  text += buildDeviceBatteryString(context, device);
-            String text = buildDeviceBatteryString(context, device);
-
             boolean isConnected = device.isInitialized();
+            final String text = buildDeviceNotificationText(context, device);
             builder.setContentTitle(deviceName)
                     .setTicker(deviceName + " - " + text)
                     .setContentText(text)
@@ -246,10 +245,10 @@ public class GB {
                             1,
                             deviceCommunicationServiceIntent,
                             PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE
-                    );
-                    builder.addAction(R.drawable.ic_refresh, context.getString(R.string.controlcenter_fetch_activity_data), fetchPendingIntent);
+                );
+                builder.addAction(R.drawable.ic_refresh, context.getString(R.string.controlcenter_fetch_activity_data), fetchPendingIntent);
                 }
-            } else if (device.getState().equals(GBDevice.State.WAITING_FOR_RECONNECT) || device.getState().equals(GBDevice.State.NOT_CONNECTED)) {
+            } else if (device.getState() == GBDevice.State.WAITING_FOR_RECONNECT || device.getState() == GBDevice.State.WAITING_FOR_SCAN || device.getState() == GBDevice.State.NOT_CONNECTED) {
                 deviceCommunicationServiceIntent.setAction(DeviceService.ACTION_CONNECT);
                 deviceCommunicationServiceIntent.putExtra(GBDevice.EXTRA_DEVICE, device);
                 PendingIntent reconnectPendingIntent = PendingIntent.getService(
@@ -272,9 +271,7 @@ public class GB {
                 anyDeviceSupportesActivityDataFetching |= device.getDeviceCoordinator().supportsDataFetching(device);
 
                 String deviceName = device.getAliasOrName();
-               //= String text = device.getStateString(context);
-               //= text += buildDeviceBatteryString(context, device);
-                String text = buildDeviceBatteryString(context, device);
+                final String text = buildDeviceNotificationText(context, device);
                 contentText.append(deviceName).append(" (").append(text).append(")<br>");
             }
 
@@ -319,24 +316,50 @@ public class GB {
         return builder.build();
     }
 
+    private static String buildDeviceNotificationText(final Context context, final GBDevice device) {
+        final String stateText = context.getString(device.getState().getStringId());
+
+        if (!device.isInitialized()) {
+            return stateText;
+        }
+
+        final String batteryText = buildDeviceBatteryString(context, device);
+        if (batteryText.isEmpty()) {
+            return stateText;
+        }
+
+        // Once fully connected/initialized, keep the notification compact: battery only.
+        return batteryText;
+    }
+
     public static String buildDeviceBatteryString(final Context context, final GBDevice device) {
         final DevicePrefs devicePrefs = GBApplication.getDevicePrefs(device);
         final List<Integer> batteryLevels = new ArrayList<>();
         final StringBuilder sb = new StringBuilder();
+        boolean anyCharging = false;
         for (int i = 0; i < 3; i++) {
             if (devicePrefs.getBatteryShowInNotification(i) && device.getBatteryLevel(i) != GBDevice.BATTERY_UNKNOWN) {
                 batteryLevels.add(device.getBatteryLevel(i));
+                final BatteryState batteryState = device.getBatteryState(i);
+                anyCharging |= (batteryState == BatteryState.BATTERY_CHARGING || batteryState == BatteryState.BATTERY_CHARGING_FULL);
             }
         }
         if (!batteryLevels.isEmpty()) {
-           //=(context.getString(R.string.battery)).append(" ");
-            sb.append(context.getString(R.string.battery)).append(": ").append(" ");//sb.append("\uD83D\uDD0B")//battery icon
+            sb.append(context.getString(R.string.battery)).append(": ");
+
+            if (anyCharging) {
+                sb.append("charging(");
+            }
 
             for (int i = 0; i < batteryLevels.size(); i++) {
                 sb.append(batteryLevels.get(i)).append("%");
                 if (i + 1 < batteryLevels.size()) {
                     sb.append(", ");
                 }
+            }
+
+            if (anyCharging) {
+                sb.append(")");
             }
         }
 
@@ -382,6 +405,45 @@ public class GB {
     public static void updateNotification(List<GBDevice> devices, Context context) {
         Notification notification = createNotification(devices, context);
         notify(NOTIFICATION_ID, notification, context);
+    }
+
+    public static void updateNotificationForDevice(@Nullable GBDevice updatedDevice, @NonNull Context context) {
+        try {
+            final GBApplication app = GBApplication.app();
+            final DeviceManager deviceManager = app != null ? app.getDeviceManager() : null;
+
+            if (deviceManager != null) {
+                final List<GBDevice> initializedDevices = new ArrayList<>();
+                for (final GBDevice device : deviceManager.getDevices()) {
+                    if (device.isInitialized()) {
+                        initializedDevices.add(device);
+                    }
+                }
+                if (!initializedDevices.isEmpty()) {
+                    updateNotification(initializedDevices, context);
+                    return;
+                }
+
+                if (updatedDevice != null) {
+                    updateNotification(Collections.singletonList(updatedDevice), context);
+                    return;
+                }
+
+                final List<GBDevice> allDevices = deviceManager.getDevices();
+                if (!allDevices.isEmpty()) {
+                    updateNotification(Collections.singletonList(allDevices.get(0)), context);
+                    return;
+                }
+            }
+        } catch (final Exception ignore) {
+            // fall through
+        }
+
+        if (updatedDevice != null) {
+            updateNotification(Collections.singletonList(updatedDevice), context);
+        } else {
+            updateNotification(Collections.emptyList(), context);
+        }
     }
 
     public static void notify(int id, @NonNull Notification notification, Context context) {

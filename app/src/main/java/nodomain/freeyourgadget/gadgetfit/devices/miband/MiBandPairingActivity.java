@@ -29,10 +29,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -65,6 +67,7 @@ public class MiBandPairingActivity extends AbstractGBActivity implements Bonding
     private static final Logger LOG = LoggerFactory.getLogger(MiBandPairingActivity.class);
 
     private static final int REQ_CODE_USER_SETTINGS = 52;
+    private static final int REQ_CODE_BLUETOOTH_PERMISSION = 119;
 
     private final BroadcastReceiver pairingReceiver = BondingUtil.getPairingReceiver(this);
     private final BroadcastReceiver bondingReceiver = BondingUtil.getBondingReceiver(this);
@@ -183,15 +186,19 @@ public class MiBandPairingActivity extends AbstractGBActivity implements Bonding
             // devices, as bonded devices are displayed anyway.
             String macAddress = deviceCandidate.getMacAddress();
             BluetoothDevice device = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(macAddress);
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                Toast.makeText(this,"Bluetooth permission not granted", Toast.LENGTH_SHORT).show();//esd add
+            String permission;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                // Android 12+
+                permission = Manifest.permission.BLUETOOTH_CONNECT;
+            } else {
+                // Android 11-
+                permission = Manifest.permission.ACCESS_FINE_LOCATION;
+            }
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(
+                        this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, REQ_CODE_BLUETOOTH_PERMISSION);
+                //=Toast.makeText(this,"Bluetooth permission not granted", Toast.LENGTH_SHORT).show();//esd add
                 return;
             }
             LOG.debug("paired_MACC: "+ macAddress);
@@ -211,6 +218,21 @@ public class MiBandPairingActivity extends AbstractGBActivity implements Bonding
             startActivity(intent);
         }
         finish();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQ_CODE_BLUETOOTH_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted
+                GB.toast(this, getString(R.string.permission_bluetooth_summary), Toast.LENGTH_LONG, GB.INFO);
+                startPairing();
+            } else {
+                // Permission denied
+                GB.toast(this, getString(R.string.permission_bluetooth_denied), Toast.LENGTH_LONG, GB.WARN);
+            }
+        }
     }
 
     @Override

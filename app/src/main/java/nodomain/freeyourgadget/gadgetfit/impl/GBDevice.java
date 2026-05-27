@@ -45,6 +45,7 @@ import nodomain.freeyourgadget.gadgetfit.model.BatteryState;
 import nodomain.freeyourgadget.gadgetfit.model.DeviceType;
 import nodomain.freeyourgadget.gadgetfit.model.GenericItem;
 import nodomain.freeyourgadget.gadgetfit.model.ItemWithDetails;
+import nodomain.freeyourgadget.gadgetfit.util.GB;
 
 public class GBDevice implements Parcelable {
     public static final String ACTION_DEVICE_CHANGED
@@ -487,6 +488,9 @@ public class GBDevice implements Parcelable {
         deviceUpdateIntent.putExtra(EXTRA_DEVICE, this);
         deviceUpdateIntent.putExtra(EXTRA_UPDATE_SUBJECT, subject);
         LocalBroadcastManager.getInstance(context).sendBroadcast(deviceUpdateIntent);
+        if (subject != DeviceUpdateSubject.NOTHING) {
+            GB.updateNotificationForDevice(this, context);
+        }
     }
 
     @Override

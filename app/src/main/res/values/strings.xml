@@ -1301,6 +1301,7 @@
     <string name="bahasa_melayu">Bahasa Melayu</string>
     <string name="FetchActivityOperation_about_to_transfer_since">About to transfer data since %1$s</string>
     <string name="waiting_for_reconnect">Waiting for reconnect</string>
+    <string name="reconnecting">Reconnecting...</string>
     <string name="activity_prefs_about_you">About you</string>
     <string name="activity_prefs_goals">Goals</string>
     <string name="activity_prefs_date_birth">Date of birth</string>
@@ -4145,6 +4146,7 @@
     <string name="permission_background_location_title">Background location</string>
     <string name="permission_background_location_summary">Scanning for Bluetooth devices in the background and sending the location to certain gadgets</string>
     <string name="permission_bluetooth_title">Bluetooth</string>
+    <string name="permission_bluetooth_denied">Bluetooth permission denied</string>
     <string name="permission_bluetooth_summary">Connecting to Bluetooth devices</string>
     <string name="permission_bluetooth_admin_title">Bluetooth admin</string>
     <string name="permission_bluetooth_admin_summary">Discovering and pairing Bluetooth devices</string>

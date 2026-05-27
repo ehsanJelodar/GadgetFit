@@ -149,7 +149,7 @@ public class DeviceManager {
                 selectedDevices.add(device);
             }
         }
-        GB.updateNotification(selectedDevices, context);
+        GB.updateNotificationForDevice(dev, context);
     }
 
     private void refreshPairedDevices() {
