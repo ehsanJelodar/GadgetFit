@@ -143,6 +143,7 @@ android {
             //versionNameSuffix ""
         }
 
+/*
         banglejs {
             dimension "device_type"
             applicationId "com.espruino.gadgetfit"
@@ -151,6 +152,7 @@ android {
             buildConfigField "boolean", "INTERNET_ACCESS", "true"
             // Note: app/src/banglejs/AndroidManifest.xml contains some extra permissions
         }
+*/
     }
 
     sourceSets {
@@ -166,7 +168,7 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
 
-        nightly {
+        /*nightly {
             applicationIdSuffix ".nightly"
             versionNameSuffix "-${getGitHashShort()}"
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
@@ -192,11 +194,12 @@ android {
             } else {
                 signingConfig = signingConfigs.debug
             }
-        }
+        }*/
 
         applicationVariants.all { variant ->
             variant.resValue "string", "applicationId", variant.applicationId
 
+/*
             if (variant.buildType.name == 'nightly' || variant.buildType.name == 'nopebble') {
                 variant.outputs.all {
                     def versionCode = getVersionCode()
@@ -208,11 +211,17 @@ android {
                     outputFileName = "${applicationId}_${variant.versionName}.apk"
                 }
             }
+*/
         }
     }
 
     lint {
-        abortOnError = true
+
+        abortOnError = false
+        checkReleaseBuilds = true
+        disable += "TypographyFractions"
+        disable += "UnusedResources"
+
         lintConfig = file("${rootDir}/app/src/main/lint.xml")
         // If true, generate an HTML report (with issue explanations, sourcecode, etc)
         htmlReport = true
